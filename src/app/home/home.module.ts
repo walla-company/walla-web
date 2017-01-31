@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HomeComponent } from './index';
-import { UsersModule } from './users/index';
+import { HomeComponent } from './home.component';
+import { UsersModule } from './users/users.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NavbarModule } from '../shared';
@@ -18,7 +18,8 @@ import { NavbarModule } from '../shared';
     imports: [
         BrowserModule,
         RouterModule,
-        NavbarModule
+        NavbarModule,
+        UsersModule
     ]
 })
 export class HomeModule {

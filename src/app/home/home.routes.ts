@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { AuthGuard } from '../guards/auth.guard';
-import { UsersRoutes } from './users/index';
+import { UsersRoutes } from './users/users.routes';
 
 export const HomeRoutes: Routes = [
   {

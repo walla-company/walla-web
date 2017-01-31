@@ -1,0 +1,10 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-pencil"></i> Edit User Profile</h3>
+    </div>
+    <div class="panel-body">
+        <div *ngIf="user">
+            {{user.getFullName()}}
+        </div>
+    </div>
+</div>

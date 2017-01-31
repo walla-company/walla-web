@@ -1,7 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeRoutes } from './home/index';
-import { LoginRoutes } from './login/index';
+import { HomeRoutes } from './home/home.routes';
+import { LoginRoutes } from './login/login.routes';
 
 const appRoutes: Routes = [
     ...HomeRoutes,

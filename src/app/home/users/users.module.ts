@@ -1,16 +1,22 @@
 import { NgModule } from '@angular/core';
-import { UsersComponent } from './index';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { UsersComponent } from './users.component';
+import { UsersFormComponent } from './users-form.component';
 
 @NgModule({
     declarations: [
-        UsersComponent
+        UsersComponent,
+        UsersFormComponent
     ],
     exports: [
-        UsersComponent
+        UsersComponent,
+        UsersFormComponent
     ],
     imports: [
-        BrowserModule
+        BrowserModule,
+        RouterModule
     ]
 })
 export class UsersModule {
