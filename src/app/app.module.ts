@@ -27,9 +27,9 @@ import { BaseRequestOptions } from '@angular/http';
         AuthService,
         UserService,
         AlertService,
-        fakeBackendProvider,
-        MockBackend,
-        BaseRequestOptions,
+        // fakeBackendProvider,
+        // MockBackend,
+        // BaseRequestOptions,
         AuthGuard
     ]
 })
