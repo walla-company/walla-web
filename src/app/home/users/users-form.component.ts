@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 
 import { User } from '../../models/index';
 import { UserService } from '../../services/index';
+import { AppSettings } from '../../app.settings';
 
 @Component({
     moduleId: module.id,
@@ -19,8 +20,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            let id = +params['id'];
-            this.userService.getById(id).then(user => this.user = user);
+            this.userService.getById(params['id'], AppSettings.getCurrentDomain()).then(user => this.user = user);
         });
     }
 

@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 
-import { User } from '../../models/index';
-import { UserService } from '../../services/index';
+import { User, Domain } from '../../models/index';
+import { UserService, DomainService } from '../../services/index';
+import { AppSettings } from '../../app.settings';
 
 @Component({
     moduleId: module.id,
@@ -10,13 +11,31 @@ import { UserService } from '../../services/index';
 })
 export class UsersComponent {
     users: User[] = [];
+    domains: Domain[];
     loading: boolean = false;
+    school_id: string;
 
-    constructor (private userService: UserService) {
-        this.loading = true;
-        userService.getAll().then((list => {
-            this.users = list || [];
-            this.loading = false;
-        }).bind(this));
+    constructor (private userService: UserService,
+                 private domainService: DomainService) {
+        this.domains = AppSettings.getAllowedDomains();
+        this.school_id = AppSettings.getCurrentDomain();
+        this.loadUsers();
+    }
+
+    changeDomain() {
+        AppSettings.setCurrentDomain(this.school_id);
+        this.loadUsers();
+    }
+
+    loadUsers() {
+        this.userService.getAll(this.school_id).then(users => {
+            let tmpUsers: User[] = [];
+            for (let id in users) {
+                if (users.hasOwnProperty(id)) {
+                    tmpUsers.push(<User> users[id]);
+                }
+            }
+            this.users = tmpUsers;
+        });
     }
 }

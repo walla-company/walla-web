@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService, AlertService } from '../services/index';
-import { User } from '../models/index';
+import { User, Domain } from '../models/index';
+import { AppSettings } from '../app.settings';
 
 @Component({
     moduleId: module.id,
@@ -31,11 +32,15 @@ export class LoginComponent implements OnInit {
     }
 
     login () {
-        let self = this;
-        self.authService.login(this.model)
-            .then(res => self.router.navigate([this.redirectUrl]),
-                       err => {
-                           this.alertService.error(err);
-                       });
+        this.authService.login(this.model)
+            .then(res => {
+                // hard coded for now
+                AppSettings.setAllowedDomains([
+                    <Domain> { id: 'duke', full_name: 'Duke University', domain: 'duke.edu' },
+                    <Domain> { id: 'sandiego', full_name: 'University of San Diego', domain: 'sandiego.edu' }
+                ]);
+                AppSettings.setCurrentDomain('duke');
+                this.router.navigate([this.redirectUrl]);
+            }, err => this.alertService.error(err));
     }
 }

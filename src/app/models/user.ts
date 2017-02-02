@@ -1,21 +1,16 @@
 export class User {
-    id: number;
+    user_id: string;
     email: string;
-    password: string;
-    firstName: string;
-    lastName: string;
-
-    getFullName(): string {
-        return this.firstName + ' ' + this.lastName;
-    }
-
-    constructor (data: any = null) {
-        if (data) {
-            this.id = data.id;
-            this.email = data.email;
-            this.password = data.password;
-            this.firstName = data.firstName;
-            this.lastName = data.lastName;
-        }
-    }
+    name: string;
+    first_name: string;
+    last_name: string;
+    academic_level: string;
+    description: string;
+    graduation_year: number;
+    hometown: string;
+    major: string;
+    profile_image_url: string;
+    time_created: number;
+    verified: boolean;
+    hash: string;
 }

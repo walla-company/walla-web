@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 
 import { UsersComponent } from './users.component';
 import { UsersFormComponent } from './users-form.component';
@@ -15,6 +16,7 @@ import { UsersFormComponent } from './users-form.component';
         UsersFormComponent
     ],
     imports: [
+        FormsModule,
         BrowserModule,
         RouterModule
     ]
