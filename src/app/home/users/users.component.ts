@@ -14,7 +14,6 @@ export class UsersComponent {
     domains: Domain[];
     loading: boolean = false;
     school_id: string;
-
     constructor (private userService: UserService,
                  private domainService: DomainService) {
         this.domains = AppSettings.getAllowedDomains();
@@ -28,14 +27,16 @@ export class UsersComponent {
     }
 
     loadUsers() {
+        this.loading = true;
         this.userService.getAll(this.school_id).then(users => {
             let tmpUsers: User[] = [];
             for (let id in users) {
-                if (users.hasOwnProperty(id)) {
+                if (users.hasOwnProperty(id) && users[id].interests && users[id].interests.length) {
                     tmpUsers.push(<User> users[id]);
                 }
             }
             this.users = tmpUsers;
+            this.loading = false;
         });
     }
 }

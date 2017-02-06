@@ -4,7 +4,104 @@
     </div>
     <div class="panel-body">
         <div *ngIf="user">
-            {{user.name}}
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#profile" data-toggle="tab">Profile Data</a></li>
+                <li role="presentation"><a href="#activity" data-toggle="tab">Activity</a></li>
+            </ul>
+            
+            <div class="row">&nbsp;</div>
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="profile">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="firstName">First Name</label>
+                                <input (change)="updateFirstName()" type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="lastName">Last Name</label>
+                                <input (change)="updateLastName()" type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="email">E-mail</label>
+                                <input (change)="updateEmail()" type="text" class="form-control" id="email" [(ngModel)]="user.email">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="email">Hometown</label>
+                                <input (change)="updateHometown()" type="text" class="form-control" id="hometown" [(ngModel)]="user.hometown">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <input (change)="updateDescription()" type="text" class="form-control" id="description" [(ngModel)]="user.description">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="major">Major</label>
+                                <input (change)="updateMajor()" type="text" class="form-control" id="major" [(ngModel)]="user.major">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="graduation_year">Graduation Year</label>
+                                <input (change)="updateGraduationYear()" type="text" class="form-control" id="graduation_year" [(ngModel)]="user.graduation_year">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="academic_level">Academic Level</label>
+                                <select (change)="updateAcademicLevel()" class="form-control" id="academic_level" [(ngModel)]="user.academic_level">
+                                    <option value="grad">Graduated</option>
+                                    <option value="undergrad">Undergraduated</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="profile_image_url">Profile Image Url</label>
+                                <input (change)="updateProfileImageUrl()" type="text" class="form-control" id="profile_image_url" [(ngModel)]="user.profile_image_url">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="verified" [(ngModel)]="user.verified"> Verified
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="activity">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <select class="form-control" id="activity_since">
+                                    <option value="day">In past day</option>
+                                    <option value="week">In past week</option>
+                                    <option value="month">In past month</option>
+                                    <option value="semester">In past semester</option>
+                                    <option value="joining">Since joining</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <chart [type]="chartData.type" [data]="chartData.data" [options]="chartData.options"></chart>
+                </div>
+            </div>
         </div>
     </div>
 </div>

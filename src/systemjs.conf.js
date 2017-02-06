@@ -11,7 +11,10 @@
     // map tells the System loader where to look for things
     var map = {
         'app': 'src/tmp/app',
-        'test': 'src/tmp/test'
+        'test': 'src/tmp/test',
+        'notyf': 'node_modules/notyf/dist',
+        'chart.js': 'node_modules/chart.js/dist',
+        'angular2-chartjs': 'node_modules/angular2-chartjs/dist'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -24,6 +27,14 @@
         },
         'rxjs': {
             defaultExtension: 'js'
+        },
+        'notyf': {
+            defaultExtension: 'js',
+            main: 'notyf.min.js'
+        },
+        'chart.js': {
+            defaultExtension: 'js',
+            main: 'Chart.min.js'
         }
     };
 
@@ -31,7 +42,8 @@
     var npmPackages = [
         '@angular',
         'rxjs',
-        'lodash'
+        'lodash',
+        'angular2-datatable'
     ];
 
     // Add package entries for packages that expose barrels using index.js
@@ -40,7 +52,9 @@
         'app/shared',
 
         // 3rd party barrels
-        'lodash'
+        'lodash',
+        'angular2-datatable',
+        'angular2-chartjs'
     ];
 
     // Add package entries for angular packages

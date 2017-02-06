@@ -20,14 +20,15 @@ export class LoginComponent implements OnInit {
     constructor (private router: Router,
                  private authService: AuthService,
                  private alertService: AlertService) {
-        if (authService.isLoggedIn()) {
-            this.router.navigate(['home']);
-        }
+        this.router.navigate(['home']);
+        // if (authService.isLoggedIn()) {
+        //     this.router.navigate(['home']);
+        // }
     }
 
     ngOnInit() {
-        this.authService.logOut();
-        this.redirectUrl = this.authService.redirectUrl || 'home';
+        // this.authService.logOut();
+        // this.redirectUrl = this.authService.redirectUrl || 'home';
         this.authService.redirectUrl = null;
     }
 
