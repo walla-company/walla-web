@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import { Activity, Domain } from '../../models/index';
 import { ActivityService, DomainService } from '../../services/index';
@@ -9,26 +9,23 @@ import { AppSettings } from '../../app.settings';
     selector: 'wl-posts',
     templateUrl: 'posts.html'
 })
-export class PostsComponent {
+export class PostsComponent implements OnInit {
     activities: Activity[] = [];
-    domains: Domain[];
     loading: boolean = false;
-    school_id: string;
     constructor (private activityService: ActivityService,
                  private domainService: DomainService) {
-        this.domains = AppSettings.getAllowedDomains();
-        this.school_id = AppSettings.getCurrentDomain();
         this.loadPosts();
     }
 
-    changeDomain() {
-        AppSettings.setCurrentDomain(this.school_id);
-        this.loadPosts();
+    ngOnInit() {
+        this.domainService.getCurrentDomain().subscribe(() => {
+           this.loadPosts();
+        });
     }
 
     loadPosts() {
         this.loading = true;
-        this.activityService.getAll(this.school_id).then(posts => {
+        this.activityService.getAll(AppSettings.getCurrentDomain()).then(posts => {
             let tmpPosts: Activity[] = [];
             for (let id in posts) {
                 if (posts.hasOwnProperty(id)) {

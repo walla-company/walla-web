@@ -52,7 +52,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
         }
     };
 
-    private school_id: string;
+    private domain_id: string;
     private sub: any;
 
     constructor(private route: ActivatedRoute,
@@ -62,13 +62,13 @@ export class UsersFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.school_id = AppSettings.getCurrentDomain();
+            this.domain_id = AppSettings.getCurrentDomain();
             let uid = params['id'];
-            this.userService.getById(uid, this.school_id).then(user => {
+            this.userService.getById(uid, this.domain_id).then(user => {
                 this.user = user;
                 // setTimeout(this.setChart, 1000); // wait for the canvas to be drawn. provisory
             });
-            this.userService.getUserInterests(uid, this.school_id).then(list => {
+            this.userService.getUserInterests(uid, this.domain_id).then(list => {
                 console.log(list);
             });
         });
@@ -79,7 +79,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateFirstName() {
-        this.userService.updateFirstName(this.user.user_id, this.school_id, this.user.first_name)
+        this.userService.updateFirstName(this.user.user_id, this.domain_id, this.user.first_name)
             .then(() => {
                 this.alertService.success('First name updated');
             }, () => {
@@ -88,7 +88,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateLastName() {
-        this.userService.updateLastName(this.user.user_id, this.school_id, this.user.last_name)
+        this.userService.updateLastName(this.user.user_id, this.domain_id, this.user.last_name)
             .then(() => {
                 this.alertService.success('Last name updated');
             }, () => {
@@ -97,7 +97,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateEmail() {
-        this.userService.updateEmail(this.user.user_id, this.school_id, this.user.email)
+        this.userService.updateEmail(this.user.user_id, this.domain_id, this.user.email)
             .then(() => {
                 this.alertService.success('Email updated');
             }, () => {
@@ -106,7 +106,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateAcademicLevel() {
-        this.userService.updateAcademicLevel(this.user.user_id, this.school_id, this.user.academic_level)
+        this.userService.updateAcademicLevel(this.user.user_id, this.domain_id, this.user.academic_level)
             .then(() => {
                 this.alertService.success('Academic level updated');
             }, () => {
@@ -115,7 +115,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateMajor() {
-        this.userService.updateMajor(this.user.user_id, this.school_id, this.user.major)
+        this.userService.updateMajor(this.user.user_id, this.domain_id, this.user.major)
             .then(() => {
                 this.alertService.success('Major updated');
             }, () => {
@@ -124,7 +124,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateGraduationYear() {
-        this.userService.updateGraduationYear(this.user.user_id, this.school_id, this.user.graduation_year)
+        this.userService.updateGraduationYear(this.user.user_id, this.domain_id, this.user.graduation_year)
             .then(() => {
                 this.alertService.success('Graduation year updated');
             }, () => {
@@ -133,7 +133,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateHometown() {
-        this.userService.updateHometown(this.user.user_id, this.school_id, this.user.hometown)
+        this.userService.updateHometown(this.user.user_id, this.domain_id, this.user.hometown)
             .then(() => {
                 this.alertService.success('Hometown updated');
             }, () => {
@@ -142,7 +142,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateDescription() {
-        this.userService.updateDescription(this.user.user_id, this.school_id, this.user.description)
+        this.userService.updateDescription(this.user.user_id, this.domain_id, this.user.description)
             .then(() => {
                 this.alertService.success('Description updated');
             }, () => {
@@ -151,7 +151,7 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     }
 
     updateProfileImageUrl() {
-        this.userService.updateProfileImageUrl(this.user.user_id, this.school_id, this.user.profile_image_url)
+        this.userService.updateProfileImageUrl(this.user.user_id, this.domain_id, this.user.profile_image_url)
             .then(() => {
                 this.alertService.success('Profile image url updated');
             }, () => {

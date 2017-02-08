@@ -16,7 +16,7 @@ export class AppSettings {
         return JSON.parse(localStorage.getItem('CurrentDomain'));
     }
 
-    public static setCurrentDomain(school_id: string) {
-        localStorage.setItem('CurrentDomain', JSON.stringify(school_id));
+    public static setCurrentDomain(domain_id: string) {
+        localStorage.setItem('CurrentDomain', JSON.stringify(domain_id));
     }
 }

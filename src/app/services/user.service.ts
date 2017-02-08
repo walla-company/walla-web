@@ -9,116 +9,116 @@ import { AppSettings } from '../app.settings';
 export class UserService {
     constructor(private http: Http) { }
 
-    getAll(school_id: string = null): Promise<any[]> {
+    getAll(domain_id: string = null): Promise<any[]> {
         return new Promise<User[]>((resolve, reject) => {
-            let query = 'school_identifier=' + school_id + '&token=' + AppSettings.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&token=' + AppSettings.API_TOKEN;
             this.http.get(AppSettings.API_ENDPOINT + '/get_users?' + query).map(res => res.json())
                 .subscribe(arr => resolve(<any[]> arr), err => reject(err.message));
         });
     }
 
-    getUserInterests(uid: string, school_id: string): Promise<any[]> {
+    getUserInterests(uid: string, domain_id: string): Promise<any[]> {
         return new Promise<User[]>((resolve, reject) => {
-            let query = 'school_identifier=' + school_id + '&uid=' + uid + '&token=' + AppSettings.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&uid=' + uid + '&token=' + AppSettings.API_TOKEN;
             this.http.get(AppSettings.API_ENDPOINT + '/get_user_interests?' + query).map(res => res.json())
                 .subscribe(arr => resolve(<User[]> arr), err => reject(err.message));
         });
     }
 
-    getById(uid: string, school_id: string): Promise<User> {
+    getById(uid: string, domain_id: string): Promise<User> {
         return new Promise<User>((resolve, reject) => {
-            let query = 'school_identifier=' + school_id + '&uid=' + uid + '&token=' + AppSettings.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&uid=' + uid + '&token=' + AppSettings.API_TOKEN;
             this.http.get(AppSettings.API_ENDPOINT + '/get_user?' + query).map(res => res.json())
                 .subscribe(u => resolve(<User> u), err => reject(err.message));
         });
     }
 
-    updateFirstName(uid: string, school_id: string, first_name: string) {
+    updateFirstName(uid: string, domain_id: string, first_name: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_first_name?' + query, {
-                school_identifier: school_id, uid, first_name
+                school_identifier: domain_id, uid, first_name
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateLastName(uid: string, school_id: string, last_name: string) {
+    updateLastName(uid: string, domain_id: string, last_name: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_last_name?' + query, {
-                school_identifier: school_id, uid, last_name
+                school_identifier: domain_id, uid, last_name
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateEmail(uid: string, school_id: string, email: string) {
+    updateEmail(uid: string, domain_id: string, email: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_email?' + query, {
-                school_identifier: school_id, uid, email
+                school_identifier: domain_id, uid, email
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateAcademicLevel(uid: string, school_id: string, academic_level: string) {
+    updateAcademicLevel(uid: string, domain_id: string, academic_level: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_academic_level?' + query, {
-                school_identifier: school_id, uid, academic_level
+                school_identifier: domain_id, uid, academic_level
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateMajor(uid: string, school_id: string, major: string) {
+    updateMajor(uid: string, domain_id: string, major: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_major?' + query, {
-                school_identifier: school_id, uid, major
+                school_identifier: domain_id, uid, major
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateGraduationYear(uid: string, school_id: string, graduation_year: number) {
+    updateGraduationYear(uid: string, domain_id: string, graduation_year: number) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_graduation_year?' + query, {
-                school_identifier: school_id, uid, graduation_year
+                school_identifier: domain_id, uid, graduation_year
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateHometown(uid: string, school_id: string, hometown: string) {
+    updateHometown(uid: string, domain_id: string, hometown: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_hometown?' + query, {
-                school_identifier: school_id, uid, hometown
+                school_identifier: domain_id, uid, hometown
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateDescription(uid: string, school_id: string, description: string) {
+    updateDescription(uid: string, domain_id: string, description: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_description?' + query, {
-                school_identifier: school_id, uid, description
+                school_identifier: domain_id, uid, description
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateProfileImageUrl(uid: string, school_id: string, profile_image_url: string) {
+    updateProfileImageUrl(uid: string, domain_id: string, profile_image_url: string) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_profile_image_url?' + query, {
-                school_identifier: school_id, uid, profile_image_url
+                school_identifier: domain_id, uid, profile_image_url
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }
 
-    updateLastLogon(uid: string, school_id: string, last_logon: Date = new Date()) {
+    updateLastLogon(uid: string, domain_id: string, last_logon: Date = new Date()) {
         return new Promise<User>((resolve, reject) => {
             let query = 'token=' + AppSettings.API_TOKEN;
             this.http.post(AppSettings.API_ENDPOINT + '/update_user_last_logon?' + query, {
-                school_identifier: school_id, uid, last_logon: last_logon.getTime() / 1000
+                school_identifier: domain_id, uid, last_logon: last_logon.getTime() / 1000
             }).subscribe(u => resolve(), err => reject(err.message));
         });
     }

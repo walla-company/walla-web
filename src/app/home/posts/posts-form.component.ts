@@ -51,7 +51,6 @@ export class PostsFormComponent implements OnInit, OnDestroy {
         }
     };
 
-    private school_id: string;
     private sub: any;
 
     constructor(private route: ActivatedRoute,
@@ -61,9 +60,8 @@ export class PostsFormComponent implements OnInit, OnDestroy {
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(params => {
-            this.school_id = AppSettings.getCurrentDomain();
             let uid = params['id'];
-            this.activityService.getById(uid, this.school_id).then(post => {
+            this.activityService.getById(uid, AppSettings.getCurrentDomain()).then(post => {
                 this.activity = post;
             });
         });

@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
-import { AuthService } from '../../services/index';
+import { FormsModule } from '@angular/forms';
 
+import { AuthService } from '../../services/index';
 import { NavbarComponent } from './index';
 
 @NgModule({
@@ -11,7 +12,8 @@ import { NavbarComponent } from './index';
     ],
     imports: [
         RouterModule,
-        BrowserModule
+        BrowserModule,
+        FormsModule
     ],
     exports: [
         NavbarComponent

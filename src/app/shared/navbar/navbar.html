@@ -16,6 +16,11 @@
         <li><a [routerLink]="['/home/posts']">Posts</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <li class="domainSelect">
+          <select class="form-control" [(ngModel)]="domain_id" (change)="changeDomain()">
+            <option *ngFor="let d of domains" [value]="d.id">{{d.full_name}}</option>
+          </select>
+        </li>
         <li><a href="javascript:;" (click)="logOut()">Logout</a></li>
       </ul>
     </div>
