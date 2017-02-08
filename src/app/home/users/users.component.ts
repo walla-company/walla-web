@@ -31,7 +31,7 @@ export class UsersComponent {
         this.userService.getAll(this.school_id).then(users => {
             let tmpUsers: User[] = [];
             for (let id in users) {
-                if (users.hasOwnProperty(id) && users[id].interests && users[id].interests.length) {
+                if (users.hasOwnProperty(id)) {
                     tmpUsers.push(<User> users[id]);
                 }
             }
