@@ -3,18 +3,15 @@
         <h3 class="panel-title"><i class="fa fa-post"></i> Posts</h3>
     </div>
     <div class="panel-body">
-        <!--<div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="selSchool">School:</label>
-                    <select class="form-control" [(ngModel)]="school_id" (change)="changeDomain()">
-                        <option *ngFor="let d of domains" [value]="d.id">{{d.full_name}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>-->
-        <div class="text-center row">
+        <div class="text-center">
             <i class="main-spinner fa fa-spin fa-spinner" *ngIf="loading"></i>
+            <div class="input-group">
+                <input type="text" class="form-control input-lg" placeholder="Search for..." (wlEnterKeypress)="test()">
+                <span class="input-group-btn">
+                    <button class="btn btn-default input-lg" type="button"><i class="fa fa-search"></i></button>
+                </span>
+            </div>
+            <hr />
             <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
                 <thead>
                     <tr>
@@ -42,7 +39,7 @@
                         <td>{{post.end_time | secondToDate | date:'dd/MM/yyyy HH:mm'}}</td>
                         <td>{{post.location.name}}</td>
                         <td>
-                            <a class="btn btn-primary" [routerLink]="['edit', post.activity_id]"><span class="fa fa-pencil"></span></a>
+                            <a class="btn btn-default" [routerLink]="['details', post.activity_id]" title="See details"><span class="fa fa-search-plus"></span></a>
                         </td>
                     </tr>
                     <tr *ngIf="!mf.data.length">

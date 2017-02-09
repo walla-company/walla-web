@@ -3,17 +3,7 @@
         <h3 class="panel-title"><i class="fa fa-user"></i> Users</h3>
     </div>
     <div class="panel-body">
-        <!--<div class="row">
-            <div class="col-md-3">
-                <div class="form-group">
-                    <label for="selSchool">School:</label>
-                    <select class="form-control" [(ngModel)]="school_id" (change)="changeDomain()">
-                        <option *ngFor="let d of domains" [value]="d.id">{{d.full_name}}</option>
-                    </select>
-                </div>
-            </div>
-        </div>-->
-        <div class="text-center row">
+        <div class="text-center">
             <i class="main-spinner fa fa-spin fa-spinner" *ngIf="loading"></i>
             <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
                 <thead>
@@ -38,7 +28,7 @@
                         <td>{{user.email}}</td>
                         <td>{{user.hometown}}</td>
                         <td>
-                            <a class="btn btn-primary" [routerLink]="['edit', user.user_id]"><span class="fa fa-pencil"></span></a>
+                            <a class="btn btn-primary" [routerLink]="['edit', user.user_id]" title="Edit"><span class="fa fa-pencil"></span></a>
                         </td>
                     </tr>
                     <tr *ngIf="!mf.data.length">

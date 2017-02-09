@@ -12,6 +12,8 @@ import { AppSettings } from '../../app.settings';
 export class PostsComponent implements OnInit {
     activities: Activity[] = [];
     loading: boolean = false;
+    search: string;
+
     constructor (private activityService: ActivityService,
                  private domainService: DomainService) {
         this.loadPosts();
@@ -21,6 +23,10 @@ export class PostsComponent implements OnInit {
         this.domainService.getCurrentDomain().subscribe(() => {
            this.loadPosts();
         });
+    }
+
+    test() {
+        console.log('this is a test');
     }
 
     loadPosts() {

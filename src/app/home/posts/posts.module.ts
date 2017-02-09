@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { DataTableModule } from 'angular2-datatable';
 import { ChartModule } from 'angular2-chartjs';
+import { EnterKeypressDirective } from '../../directives/index';
 
 import { PostsComponent } from './posts.component';
 import { SecondToDatePipe } from '../../filters/index';
@@ -13,7 +14,7 @@ import { SecondToDatePipe } from '../../filters/index';
     declarations: [
         PostsComponent,
         SecondToDatePipe,
-        // UsersFormComponent
+        EnterKeypressDirective
     ],
     exports: [
         PostsComponent,
