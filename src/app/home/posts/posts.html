@@ -5,55 +5,57 @@
     <div class="panel-body">
         <div class="text-center">
             <i class="main-spinner fa fa-spin fa-spinner" *ngIf="loading"></i>
-            <div class="input-group">
-                <input type="text" class="form-control input-lg" placeholder="Search for..." (wlEnterKeypress)="test()">
-                <span class="input-group-btn">
-                    <button class="btn btn-default input-lg" type="button"><i class="fa fa-search"></i></button>
-                </span>
+            <div *ngIf="!loading">
+                <div class="input-group">
+                    <input type="text" class="form-control input-lg" placeholder="Search for..." (wlEnterKeypress)="test()">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default input-lg" type="button"><i class="fa fa-search"></i></button>
+                    </span>
+                </div>
+                <hr />
+                <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="5">
+                    <thead>
+                        <tr>
+                            <th style="width: 30%">
+                                <mfDefaultSorter by="title">Title</mfDefaultSorter>
+                            </th>
+                            <th style="width: 15%">
+                                <mfDefaultSorter by="start_time">From</mfDefaultSorter>
+                            </th>
+                            <th style="width: 15%">
+                                <mfDefaultSorter by="end_time">To</mfDefaultSorter>
+                            </th>
+                            <th style="width: 30%">
+                                <mfDefaultSorter by="location.name">Where</mfDefaultSorter>
+                            </th>
+                            <th style="width: 10%">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let post of mf.data">
+                            <td>{{post.title}}</td>
+                            <td>{{post.start_time | secondToDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                            <td>{{post.end_time | secondToDate | date:'dd/MM/yyyy HH:mm'}}</td>
+                            <td>{{post.location.name}}</td>
+                            <td>
+                                <a class="btn btn-default" [routerLink]="['details', post.activity_id]" title="See details"><span class="fa fa-search-plus"></span></a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!mf.data.length">
+                            <td colspan="4">There is no posts to show.</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
             </div>
-            <hr />
-            <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
-                <thead>
-                    <tr>
-                        <th style="width: 30%">
-                            <mfDefaultSorter by="title">Title</mfDefaultSorter>
-                        </th>
-                        <th style="width: 15%">
-                            <mfDefaultSorter by="start_time">From</mfDefaultSorter>
-                        </th>
-                        <th style="width: 15%">
-                            <mfDefaultSorter by="end_time">To</mfDefaultSorter>
-                        </th>
-                        <th style="width: 30%">
-                            <mfDefaultSorter by="location.name">Where</mfDefaultSorter>
-                        </th>
-                        <th style="width: 10%">
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let post of mf.data">
-                        <td>{{post.title}}</td>
-                        <td>{{post.start_time | secondToDate | date:'dd/MM/yyyy HH:mm'}}</td>
-                        <td>{{post.end_time | secondToDate | date:'dd/MM/yyyy HH:mm'}}</td>
-                        <td>{{post.location.name}}</td>
-                        <td>
-                            <a class="btn btn-default" [routerLink]="['details', post.activity_id]" title="See details"><span class="fa fa-search-plus"></span></a>
-                        </td>
-                    </tr>
-                    <tr *ngIf="!mf.data.length">
-                        <td colspan="4">There is no posts to show.</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">
-                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
         </div>
     </div>
 </div>
