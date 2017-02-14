@@ -18,8 +18,7 @@ export class DomainService {
     }
 
     setCurrentDomain(domain_id: string) {
-        AppSettings.setCurrentDomain(domain_id);
-        this.subject.next();
+        this.subject.next(AppSettings.setCurrentDomain(domain_id));
     }
 
     getAll(): Promise<Domain[]> {
