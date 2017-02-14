@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Activity, Domain } from '../../models/index';
-import { ActivityService, DomainService } from '../../services/index';
+import { ActivityService, DomainService, AlertService } from '../../services/index';
 import { AppSettings } from '../../app.settings';
 
 @Component({
@@ -15,7 +15,8 @@ export class PostsComponent implements OnInit {
     search: string;
 
     constructor (private activityService: ActivityService,
-                 private domainService: DomainService) {
+                 private domainService: DomainService,
+                 private alertService: AlertService) {
         this.loadPosts();
     }
 
@@ -39,6 +40,9 @@ export class PostsComponent implements OnInit {
                 }
             }
             this.activities = tmpPosts;
+            this.loading = false;
+        }, () => {
+            this.alertService.error('Could load posts data.');
             this.loading = false;
         });
     }

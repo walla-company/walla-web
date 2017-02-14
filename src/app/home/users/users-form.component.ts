@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { User } from '../../models/index';
 import { UserService , AlertService } from '../../services/index';
@@ -55,7 +55,8 @@ export class UsersFormComponent implements OnInit, OnDestroy {
     private domain_id: string;
     private sub: any;
 
-    constructor(private route: ActivatedRoute,
+    constructor(private router: Router,
+                private route: ActivatedRoute,
                 private userService: UserService,
                 private alertService: AlertService) {
     }
@@ -67,10 +68,13 @@ export class UsersFormComponent implements OnInit, OnDestroy {
             this.userService.getById(uid, this.domain_id).then(user => {
                 this.user = user;
                 // setTimeout(this.setChart, 1000); // wait for the canvas to be drawn. provisory
+            }, () => {
+                this.alertService.error('Could not load user data.');
+                this.router.navigate(['home/users']);
             });
-            this.userService.getUserInterests(uid, this.domain_id).then(list => {
-                console.log(list);
-            });
+            // this.userService.getUserInterests(uid, this.domain_id).then(list => {
+            //     console.log(list);
+            // });
         });
     }
 

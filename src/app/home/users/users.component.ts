@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { User, Domain } from '../../models/index';
-import { UserService, DomainService } from '../../services/index';
+import { UserService, DomainService, AlertService } from '../../services/index';
 import { AppSettings } from '../../app.settings';
 
 @Component({
@@ -13,7 +13,8 @@ export class UsersComponent implements OnInit {
     users: User[] = [];
     loading: boolean = false;
     constructor (private userService: UserService,
-                 private domainService: DomainService) {
+                 private domainService: DomainService,
+                 private alertService: AlertService) {
         this.loadUsers();
     }
 
@@ -33,6 +34,9 @@ export class UsersComponent implements OnInit {
                 }
             }
             this.users = tmpUsers;
+            this.loading = false;
+        }, () => {
+            this.alertService.error('Could load users data.');
             this.loading = false;
         });
     }
