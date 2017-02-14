@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 // import { Domain } from '../../models/index';
-import { DomainService } from '../../services/index';
+import { DomainService, DashboardService } from '../../services/index';
+import { DashboardData } from '../../models/index';
 import { AppSettings } from '../../app.settings';
 
 @Component({
@@ -14,9 +15,11 @@ import { AppSettings } from '../../app.settings';
 })
 export class DashboardComponent implements OnInit {
     loading: boolean = false;
+    dashboardData: DashboardData = new DashboardData();
     currentDomain: string;
 
-    constructor (private domainService: DomainService) {
+    constructor (private domainService: DomainService,
+                 private dashboardService: DashboardService) {
         this.currentDomain = AppSettings.getCurrentDomain();
         this.loadDashboardData();
     }
@@ -30,6 +33,9 @@ export class DashboardComponent implements OnInit {
 
     loadDashboardData() {
         this.loading = true;
-        setTimeout(() => this.loading = false, 500);
+        this.dashboardService.getDashboardData(this.currentDomain).then(data => {
+            this.dashboardData = data;
+            this.loading = false;
+        });
     }
 }

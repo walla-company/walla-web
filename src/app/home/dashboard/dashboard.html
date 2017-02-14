@@ -14,7 +14,7 @@
                                     <i class="fa fa-user fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">1650</div>
+                                    <div class="huge">{{dashboardData.unique_users}}</div>
                                     <div>Unique users</div>
                                 </div>
                             </div>
@@ -29,7 +29,7 @@
                                     <i class="fa fa-pie-chart fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">10%</div>
+                                    <div class="huge">{{dashboardData.percent_school_population}}%</div>
                                     <div>% of {{currentDomain}} population</div>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                                     <i class="fa fa-users fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">150</div>
+                                    <div class="huge">{{dashboardData.active_groups}}</div>
                                     <div>Active groups</div>
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                                     <i class="fa fa-user-times fa-5x"></i>
                                 </div>
                                 <div class="col-xs-9 text-right">
-                                    <div class="huge">25</div>
+                                    <div class="huge">{{dashboardData.avg_group_size}}</div>
                                     <div>Avg. group size</div>
                                 </div>
                             </div>

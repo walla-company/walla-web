@@ -6,7 +6,7 @@ import { LoginRoutes } from './login/login.routes';
 const appRoutes: Routes = [
     ...HomeRoutes,
     ...LoginRoutes,
-    { path: '**', redirectTo: '/home' }
+    { path: '**', redirectTo: '/home/dashboard' }
 ];
 
 export const routing = RouterModule.forRoot(appRoutes);
