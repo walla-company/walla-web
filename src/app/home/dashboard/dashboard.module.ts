@@ -4,10 +4,12 @@ import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular2-chartjs';
 
 import { DashboardComponent } from './dashboard.component';
+import { ChartComponent } from '../../directives/index';
 
 @NgModule({
     declarations: [
-        DashboardComponent
+        DashboardComponent,
+        ChartComponent
     ],
     exports: [
         DashboardComponent
