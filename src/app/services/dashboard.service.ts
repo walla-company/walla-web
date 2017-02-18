@@ -29,7 +29,7 @@ export class DashboardService {
             if (domain_id) {
                 query += '&school_identifier=' + domain_id;
                 if (group_id) {
-                    query += '&guid=' + domain_id;
+                    query += '&guid=' + group_id;
                 }
             }
 
@@ -63,7 +63,7 @@ export class DashboardService {
             if (domain_id) {
                 query += '&school_identifier=' + domain_id;
                 if (group_id) {
-                    query += '&guid=' + domain_id;
+                    query += '&guid=' + group_id;
                 }
             }
 
