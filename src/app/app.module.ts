@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module';
-import { AuthService, UserService, ActivityService, AlertService, DomainService, DashboardService } from './services/index';
+import { AuthService, UserService, ActivityService, AlertService, DomainService, DashboardService, GroupService } from './services/index';
 import { AuthGuard } from './guards/auth.guard';
 import { AlertComponent } from './directives/index';
 // fake-backend
@@ -34,6 +34,7 @@ import { BaseRequestOptions } from '@angular/http';
         AlertService,
         DomainService,
         DashboardService,
+        GroupService,
         // fakeBackendProvider,
         // MockBackend,
         // BaseRequestOptions,

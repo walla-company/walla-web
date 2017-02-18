@@ -27,13 +27,7 @@ export class UsersComponent implements OnInit {
     loadUsers() {
         this.loading = true;
         this.userService.getAll(AppSettings.getCurrentDomain()).then(users => {
-            let tmpUsers: User[] = [];
-            for (let id in users) {
-                if (users.hasOwnProperty(id)) {
-                    tmpUsers.push(<User> users[id]);
-                }
-            }
-            this.users = tmpUsers;
+            this.users = users;
             this.loading = false;
         }, () => {
             this.alertService.error('Could load users data.');

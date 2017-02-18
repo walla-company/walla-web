@@ -45,11 +45,25 @@
                                 </div>
                                 <div class="col-xs-9 text-right">
                                     <div class="huge">150</div>
-                                    <div>Active users (real time)</div>
+                                    <div>Daily active users</div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-lg-4 text-left" *ngIf="!selectedGroup">
+                    <div class="form-group">
+                        <label for="selGroup">Select a group to filter</label>
+                        <input class="form-control" type="text" id="selGroup" placeholder="Start typing to autocomplete" />
+                    </div>
+                </div>
+                <div class="col-lg-4 text-left" *ngIf="selectedGroup">
+                    <label>Selected group:</label>
+                    <h3>{{selectedGroup.name}}</h3>
+                    <button type="button" class="btn btn-danger" (click)="removeSelectedGroup()"><i class="fa fa-close"></i> Remove</button>
                 </div>
             </div>
             <hr />

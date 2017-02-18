@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular2-chartjs';
+import { FormsModule } from '@angular/forms';
 
 import { DashboardComponent } from './dashboard.component';
 import { ChartComponent } from '../../directives/index';
@@ -17,6 +18,7 @@ import { ChartComponent } from '../../directives/index';
     imports: [
         BrowserModule,
         RouterModule,
+        FormsModule,
         ChartModule
     ]
 })
