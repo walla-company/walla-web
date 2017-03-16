@@ -3,14 +3,19 @@ import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { ChartModule } from 'angular2-chartjs';
 import { FormsModule } from '@angular/forms';
+import { TabsModule } from 'ng2-bootstrap';
+import { MyDatePickerModule } from 'mydatepicker';
+import { MyDateRangePickerModule } from 'mydaterangepicker';
 
 import { DashboardComponent } from './dashboard.component';
-import { ChartComponent } from '../../directives/index';
+import { ChartComponent, WordCloudComponent, TabFadeTransictionDirective } from '../../directives/index';
 
 @NgModule({
     declarations: [
         DashboardComponent,
-        ChartComponent
+        ChartComponent,
+        WordCloudComponent,
+        TabFadeTransictionDirective
     ],
     exports: [
         DashboardComponent
@@ -19,7 +24,10 @@ import { ChartComponent } from '../../directives/index';
         BrowserModule,
         RouterModule,
         FormsModule,
-        ChartModule
+        ChartModule,
+        TabsModule.forRoot(),
+        MyDatePickerModule,
+        MyDateRangePickerModule
     ]
 })
 export class DashboardModule {

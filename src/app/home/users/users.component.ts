@@ -11,6 +11,7 @@ import { AppSettings } from '../../app.settings';
 })
 export class UsersComponent implements OnInit {
     users: User[] = [];
+    user: User = new User();
     loading: boolean = false;
     constructor (private userService: UserService,
                  private domainService: DomainService,

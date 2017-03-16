@@ -14,7 +14,8 @@
         'test': 'src/tmp/test',
         'notyf': 'node_modules/notyf/dist',
         'chart.js': 'node_modules/chart.js/dist',
-        'angular2-chartjs': 'node_modules/angular2-chartjs/dist'
+        'angular2-chartjs': 'node_modules/angular2-chartjs/dist',
+        'ng2-bootstrap': 'node_modules/ng2-bootstrap/bundles'
     };
 
     // packages tells the System loader how to load when no filename and/or no extension
@@ -35,6 +36,26 @@
         'chart.js': {
             defaultExtension: 'js',
             main: 'Chart.min.js'
+        },
+        'ng2-bootstrap': {
+            defaultExtension: 'js',
+            main: 'ng2-bootstrap.umd.min.js'
+        },
+        'moment': {
+            main: './moment.js',
+            defaultExtension: 'js'
+        },
+        'angular2-moment': {
+            main: './index.js',
+            defaultExtension: 'js'
+        },
+        'mydatepicker': {
+            main: 'bundles/mydatepicker.umd.js',
+            defaultExtension: 'js'
+        },
+        'mydaterangepicker': {
+            main: 'bundles/mydaterangepicker.umd.js',
+            defaultExtension: 'js'
         }
     };
 
@@ -43,7 +64,11 @@
         '@angular',
         'rxjs',
         'lodash',
-        'angular2-datatable'
+        'angular2-datatable',
+        'moment',
+        'angular2-moment',
+        'mydatepicker',
+        'mydaterangepicker'
     ];
 
     // Add package entries for packages that expose barrels using index.js

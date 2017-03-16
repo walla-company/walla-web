@@ -12,7 +12,7 @@ export class AlertComponent implements OnInit {
     message: any;
 
     private noty: any = new Notyf({
-        delay: 5000
+        delay: 15000
     });
 
     constructor(private alertService: AlertService) { }

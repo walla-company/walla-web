@@ -3,6 +3,7 @@ import { HttpModule } from '@angular/http';
 import { DataTableModule } from 'angular2-datatable';
 import 'notyf';
 
+
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { HomeModule } from './home/home.module';

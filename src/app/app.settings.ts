@@ -2,6 +2,7 @@ import { Domain } from './models/index';
 
 export class AppSettings {
     public static API_ENDPOINT: string = 'http://localhost:8080/api';
+    // public static API_ENDPOINT: string = 'https://walla-server-test.herokuapp.com/api';
     public static API_TOKEN: string = '3eaf7dFmNF447d';
 
     public static getAllowedDomains(): Domain[] {
