@@ -2245,11 +2245,6 @@ hwl-flag@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hwl-flag/-/hwl-flag-1.0.0.tgz#9d9e793165ce017a00f00418c43f942a7b1d11fa"
 
-hwl-gulplog@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/hwl-gulplog/-/hwl-gulplog-0.1.0.tgz#6414c82913697da51590397dafb12f22967811ce"
-  dependencies:
-    sparkles "^1.0.0"
 
 hwl-unicode@^2.0.0:
   version "2.0.1"
