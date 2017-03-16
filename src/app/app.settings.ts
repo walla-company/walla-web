@@ -8,7 +8,7 @@ export class AppSettings {
     public static getAllowedDomains(): Domain[] {
         return JSON.parse(localStorage.getItem('AllowedDomains'));
     }
-
+ 
     public static setAllowedDomains(domains: Domain[]) {
         localStorage.setItem('AllowedDomains', JSON.stringify(domains));
     }
