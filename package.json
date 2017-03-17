@@ -14,7 +14,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "preinstall": "npm install -g @angular/cli typescript@2.0.0",
-    "postinstall": "ng build --sm=false --aot=true --output-path=build"
+    "postinstall": "ng build --sm=false --aot=true --output-path=build --environment=prod"
   },
   "private": true,
   "dependencies": {

@@ -6,6 +6,7 @@ import { Subject } from 'rxjs/Subject';
 
 import { Domain } from '../models/index';
 import { AppSettings } from '../app.settings';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class DomainService {
@@ -23,7 +24,7 @@ export class DomainService {
 
     getAll(): Promise<Domain[]> {
         return new Promise<Domain[]>((resolve, reject) => {
-            this.http.get(AppSettings.API_ENDPOINT + '/domains?token=' + AppSettings.API_TOKEN).map(res => res.json())
+            this.http.get(environment.API_ENDPOINT + '/domains?token=' + environment.API_TOKEN).map(res => res.json())
                 .subscribe(arr => {
                     let domains: Domain[] = arr;
                     resolve(domains);

@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { User } from '../models/index';
-import { AppSettings } from '../app.settings';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +18,7 @@ export class AuthService {
         headers.append('Content-Type', 'application/json');
         let jsonData = JSON.stringify(user);
         return new Promise<User>((resolve, reject) => {
-            this.http.post(AppSettings.API_ENDPOINT + '/token', jsonData, { headers })
+            this.http.post(environment.API_ENDPOINT + '/token', jsonData, { headers })
                     .subscribe(res => {
                         let data = res.json();
                         if (data && data.token) {

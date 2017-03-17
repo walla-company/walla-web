@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 import { Group } from '../models/index';
-import { AppSettings } from '../app.settings';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class GroupService {
@@ -11,8 +11,8 @@ export class GroupService {
 
     getAll(domain_id: string, filterFn: (g: Group) => boolean = null): Promise<Group[]> {
         return new Promise<Group[]>((resolve, reject) => {
-            let query = 'school_identifier=' + domain_id + '&token=' + AppSettings.API_TOKEN;
-            this.http.get(AppSettings.API_ENDPOINT + '/get_groups?' + query).map(res => res.json())
+            let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+            this.http.get(environment.API_ENDPOINT + '/get_groups?' + query).map(res => res.json())
                 .subscribe(oGroups => {
                     let arrGroups: Group[] = [];
                     for (let k in oGroups) {

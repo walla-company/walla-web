@@ -3,7 +3,7 @@ import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import * as moment from 'moment';
 import 'rxjs/add/operator/map';
 
-import { AppSettings } from '../app.settings';
+import { environment } from '../../environments/environment';
 import { Colors } from '../helpers/colors';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class DashboardService {
 
     getDashboardUsersData(domain_id: string, group_id: string = null, date: Date = null): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            let query = 'token=' + AppSettings.API_TOKEN;
+            let query = 'token=' + environment.API_TOKEN;
             query += '&school_identifier=' + domain_id;
             if (group_id) {
                 query += '&guid=' + group_id;
@@ -21,7 +21,7 @@ export class DashboardService {
                 query += '&date=' + date.toISOString();
             }
 
-            this.http.get(AppSettings.API_ENDPOINT + '/get_dashboard_users_data?' + query).map(res => res.json())
+            this.http.get(environment.API_ENDPOINT + '/get_dashboard_users_data?' + query).map(res => res.json())
                 .subscribe(data => {
 
                     // avg_session_duration
@@ -146,13 +146,13 @@ export class DashboardService {
 
     getDashboardEventsData(domain_id: string, date: Date = null): Promise<any> {
         return new Promise<any>((resolve, reject) => {
-            let query = 'token=' + AppSettings.API_TOKEN;
+            let query = 'token=' + environment.API_TOKEN;
             query += '&school_identifier=' + domain_id;
             if (date) {
                 query += '&date=' + date.toISOString();
             }
 
-            this.http.get(AppSettings.API_ENDPOINT + '/get_dashboard_events_data?' + query).map(res => res.json())
+            this.http.get(environment.API_ENDPOINT + '/get_dashboard_events_data?' + query).map(res => res.json())
                 .subscribe(data => {
 
                     // events_avg_planning_time
