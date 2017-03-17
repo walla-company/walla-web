@@ -5,9 +5,9 @@ import { ActivityService, DomainService, AlertService } from '../../services/ind
 import { AppSettings } from '../../app.settings';
 
 @Component({
-    moduleId: module.id,
-    selector: 'wl-posts',
-    templateUrl: 'posts.html'
+  selector: 'app-posts',
+  templateUrl: './posts.component.html',
+  styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
     activities: Activity[] = [];

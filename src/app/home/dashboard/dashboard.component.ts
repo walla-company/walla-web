@@ -1,4 +1,4 @@
-import { Component, OnInit , ChangeDetectorRef, NgZone } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { IMyOptions, IMyDateModel } from 'mydatepicker';
 
 import { DomainService, DashboardService, AlertService, GroupService } from '../../services/index';
@@ -6,15 +6,12 @@ import { Group } from '../../models/index';
 import { AppSettings } from '../../app.settings';
 import * as moment from 'moment';
 
-declare var jQuery, System;
+declare var jQuery;
 
 @Component({
-    moduleId: module.id,
-    selector: 'wl-dashboard',
-    templateUrl: 'dashboard.html',
-    styleUrls: [
-        'dashboard.css'
-    ]
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
     private currentDomain: string;

@@ -1,11 +1,9 @@
 import { Routes, RouterModule } from '@angular/router';
 
-import { HomeRoutes } from './home/home.routes';
-import { LoginRoutes } from './login/login.routes';
+import { HomeRoutes } from './home/home.routing';
 
 const appRoutes: Routes = [
     ...HomeRoutes,
-    ...LoginRoutes,
     { path: '**', redirectTo: '/home/dashboard' }
 ];
 

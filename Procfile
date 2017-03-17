@@ -1,1 +1,1 @@
-web: gulp build && node serve-prod
+web: node startup/serve

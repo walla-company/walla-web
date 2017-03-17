@@ -1,19 +1,19 @@
-import { Component } from '@angular/core';
-
-import { CONSTANTS } from '../shared';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
-    moduleId: module.id,
-    selector: 'wl-home',
-    templateUrl: 'home.html',
-    styleUrls: [
-        'home.css'
-    ]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.css']
 })
-export class HomeComponent {
-    public appBrand: string;
+export class HomeComponent implements OnInit {
 
-    constructor() {
-        this.appBrand = CONSTANTS.MAIN.APP.BRAND;
-    }
+  public appBrand: string;
+
+  constructor() {
+      this.appBrand = 'Walla Web Manager';
+  }
+
+  ngOnInit() {
+  }
+
 }

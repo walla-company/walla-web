@@ -1,0 +1,382 @@
+<tabset (click)="$event.preventDefault()">
+    <div class="row">&nbsp;</div>
+    <tab heading="Users" class="text-center" (select)="loadTab('users')">
+        <i class="main-spinner fa fa-spin fa-spinner" *ngIf="!tabs_data.users"></i>
+        <div class="row" *ngIf="tabs_data.users && tabs_data.users.error">
+            <div class="col-lg-4 text-left">
+                <p>Could not load data.</p>
+                <p><a href="javascript:;" (click)="reloadPage()">Reload page</a></p>
+            </div>
+        </div>
+        <div *ngIf="tabs_data.users && !tabs_data.users.error">
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.unique_users}}</div>
+                                    <div>Unique users</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-pie-chart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.percent_school_population}}%</div>
+                                    <div>% of {{currentDomain}} population</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-calendar fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.daily_active_users}}</div>
+                                    <div>Daily active users</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-group fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.active_groups}}</div>
+                                    <div>Active groups</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-home fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.avg_hosted_events_by_group}}</div>
+                                    <div>Avg hosted events by groups</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-bar-chart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.avg_group_size}}</div>
+                                    <div>Avg group size</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+            
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-globe fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.total_number_sessions}}</div>
+                                    <div>Total number of sessions</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-clock-o fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.avg_session_duration}}</div>
+                                    <div>Avg session duration</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-lg-4 text-left" *ngIf="!selectedGroup">
+                    <div class="form-group">
+                        <label for="selGroup">Select a group to filter</label>
+                        <input class="form-control" type="text" id="selGroup" placeholder="Start typing to autocomplete" />
+                    </div>
+                </div>
+                <div class="col-lg-4 text-left" *ngIf="selectedGroup">
+                    <label>Selected group:</label>
+                    <h3>{{selectedGroup.name}}</h3>
+                    <button type="button" class="btn btn-danger" (click)="removeSelectedGroup()"><i class="fa fa-close"></i> Remove</button>
+                </div>
+            </div>
+            <hr />
+            <tabset>
+                <div class="row">&nbsp;</div>   
+                <tab heading="Users over time">
+                    <div class="row">
+                        <div class="col-lg-4 text-left">
+                            <div class="form-group">
+                                    <my-date-picker (dateChanged)="onDateChanged($event)"
+                                    [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-left">
+                            <tabset type="pills">
+                                <tab *ngFor="let chart of over_time_charts"
+                                    [heading]="chart.label"
+                                    [active]="tabs_data.users.sessions_over_time_chart.selected_chart === chart.field"
+                                    (select)="tabs_data.users.sessions_over_time_chart.selected_chart = chart.field"
+                                    [disabled]="!tabs_data.users.sessions_over_time_chart[chart.field]">
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" *ngIf="tabs_data.users.sessions_over_time_chart.selected_chart">
+                            <div *ngFor="let chart of over_time_charts">
+                                <app-chart *ngIf="tabs_data.users.sessions_over_time_chart.selected_chart === chart.field"
+                                    [chartData]="tabs_data.users.sessions_over_time_chart[chart.field]"></app-chart>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-left" *ngIf="!tabs_data.users.sessions_over_time_chart.selected_chart">
+                            There's no session data to show with the selected date range.
+                        </div>
+                    </div>
+                    <!--<hr />-->
+                </tab>
+                <tab heading="Academic Level" *ngIf="tabs_data.users.grad_undergrad_chart">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-12">
+                            <app-chart [chartData]="tabs_data.users.grad_undergrad_chart"></app-chart>
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Graduation Year" *ngIf="tabs_data.users.grad_year_chart">
+                    <app-chart [chartData]="tabs_data.users.grad_year_chart"></app-chart>
+                </tab>
+                <tab heading="Fields of Study" *ngIf="tabs_data.users.fields_of_study_chart">
+                    <app-word-cloud [words]="tabs_data.users.fields_of_study_chart"></app-word-cloud>
+                </tab>
+                <!--<tab heading="Interests" *ngIf="tabs_data.users.self_reported_interests_chart">
+                    <app-chart [chartData]="tabs_data.users.self_reported_interests_chart"></app-chart>
+                </tab>-->
+            </tabset>
+        </div>
+    </tab>
+    <tab heading="Events" class="text-center" (select)="loadTab('events')">
+        <i class="main-spinner fa fa-spin fa-spinner" *ngIf="!tabs_data.events"></i>
+        <div class="row" *ngIf="tabs_data.events && tabs_data.events.error">
+            <div class="col-lg-4 text-left">
+                <p>Could not load data.</p>
+                <p><a href="javascript:;" (click)="reloadPage()">Reload page</a></p>
+            </div>
+        </div>
+        <div *ngIf="tabs_data.events && !tabs_data.events.error">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-user fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.events.events_avg_planning_time}}</div>
+                                    <div>Avg planning time</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--<div class="col-lg-4">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-xs-3">
+                                    <i class="fa fa-pie-chart fa-5x"></i>
+                                </div>
+                                <div class="col-xs-9 text-right">
+                                    <div class="huge">{{tabs_data.users.percent_school_population}}%</div>
+                                    <div>% of {{currentDomain}} population</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+            </div>
+            <tabset>
+                <div class="row">&nbsp;</div>
+                <tab heading="Event posting over time">
+                    <div class="row">
+                        <div class="col-lg-4 text-left">
+                            <div class="form-group">
+                                    <my-date-picker (dateChanged)="onDateChanged($event)"
+                                    [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-left">
+                            <tabset type="pills">
+                                <tab *ngFor="let chart of events_over_time_charts"
+                                    [heading]="chart.label"
+                                    [active]="tabs_data.events.event_posting_over_time.selected_chart === chart.field"
+                                    (select)="tabs_data.events.event_posting_over_time.selected_chart = chart.field"
+                                    [disabled]="!tabs_data.events.event_posting_over_time[chart.field]">
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" *ngIf="tabs_data.events.event_posting_over_time.selected_chart">
+                            <div *ngFor="let chart of events_over_time_charts">
+                                <app-chart *ngIf="tabs_data.events.event_posting_over_time.selected_chart === chart.field"
+                                    [chartData]="tabs_data.events.event_posting_over_time[chart.field]"></app-chart>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-left" *ngIf="!tabs_data.events.event_posting_over_time.selected_chart">
+                            There's no data to show with the selected date.
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Event time over time">
+                    <div class="row">
+                        <div class="col-lg-4 text-left">
+                            <div class="form-group">
+                                    <my-date-picker (dateChanged)="onDateChanged($event)"
+                                    [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-left">
+                            <tabset type="pills">
+                                <tab *ngFor="let chart of events_over_time_charts"
+                                    [heading]="chart.label"
+                                    [active]="tabs_data.events.event_time_over_time.selected_chart === chart.field"
+                                    (select)="tabs_data.events.event_time_over_time.selected_chart = chart.field"
+                                    [disabled]="!tabs_data.events.event_time_over_time[chart.field]">
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" *ngIf="tabs_data.events.event_time_over_time.selected_chart">
+                            <div *ngFor="let chart of events_over_time_charts">
+                                <app-chart *ngIf="tabs_data.events.event_time_over_time.selected_chart === chart.field"
+                                    [chartData]="tabs_data.events.event_time_over_time[chart.field]"></app-chart>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-left" *ngIf="!tabs_data.events.event_time_over_time.selected_chart">
+                            There's no data to show with the selected date.
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Event attendance over time">
+                    <div class="row">
+                        <div class="col-lg-4 text-left">
+                            <div class="form-group">
+                                    <my-date-picker (dateChanged)="onDateChanged($event)"
+                                    [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 text-left">
+                            <tabset type="pills">
+                                <tab *ngFor="let chart of events_over_time_charts"
+                                    [heading]="chart.label"
+                                    [active]="tabs_data.events.event_attendance_over_time.selected_chart === chart.field"
+                                    (select)="tabs_data.events.event_attendance_over_time.selected_chart = chart.field"
+                                    [disabled]="!tabs_data.events.event_attendance_over_time[chart.field]">
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-12" *ngIf="tabs_data.events.event_attendance_over_time.selected_chart">
+                            <div *ngFor="let chart of events_over_time_charts">
+                                <app-chart *ngIf="tabs_data.events.event_attendance_over_time.selected_chart === chart.field"
+                                    [chartData]="tabs_data.events.event_attendance_over_time[chart.field]"></app-chart>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 text-left" *ngIf="!tabs_data.events.event_attendance_over_time.selected_chart">
+                            There's no data to show with the selected date.
+                        </div>
+                    </div>
+                </tab>
+                <tab heading="Free Food Events" *ngIf="tabs_data.events.free_food_events_chart">
+                    <div class="row">
+                        <div class="col-md-6 col-md-offset-3 col-sm-12">
+                            <app-chart [chartData]="tabs_data.events.free_food_events_chart"></app-chart>
+                        </div>
+                    </div>
+                </tab> 
+                <tab heading="Events audience" *ngIf="tabs_data.events.events_by_audience">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <tabset>
+                                <tab heading="Academic Level" *ngIf="tabs_data.events.events_by_audience.grad_undergrad_chart">
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-3 col-sm-12">
+                                            <app-chart [chartData]="tabs_data.events.events_by_audience.grad_undergrad_chart"></app-chart>
+                                        </div>
+                                    </div>
+                                </tab>
+                                <tab heading="Graduation Year" *ngIf="tabs_data.events.events_by_audience.grad_year_chart">
+                                    <app-chart [chartData]="tabs_data.events.events_by_audience.grad_year_chart"></app-chart>
+                                </tab>
+                                <tab heading="Fields of Study" *ngIf="tabs_data.events.events_by_audience.fields_of_study_chart">
+                                    <app-word-cloud [words]="tabs_data.events.events_by_audience.fields_of_study_chart"></app-word-cloud>
+                                </tab>
+                            </tabset>
+                        </div>
+                    </div>
+                </tab> 
+            </tabset>
+        </div>
+    </tab>
+</tabset>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>
+<div class="row">&nbsp;</div>

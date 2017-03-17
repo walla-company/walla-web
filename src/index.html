@@ -1,50 +1,17 @@
+<!doctype html>
 <html>
-  <head>
-    <title>Walla Web Manager</title>
-    <base href="/">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <!-- build:css assets/bundle.css -->
-    <link rel="stylesheet" href="/assets/jqueryui/jquery-ui.min.css">
-    <link rel="stylesheet" href="../node_modules/font-awesome/css/font-awesome.css">
-    <!-- app:css -->
-    <link rel="stylesheet" href="/assets/styles/main.css">
-    <!-- endinject -->
-    <!-- endbuild -->
-  </head>
-  <body>
-    <wl-main-app>
+<head>
+  <meta charset="utf-8">
+  <title>Web</title>
+  <base href="/">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+  <app-root>
       <i class="center-fix main-spinner fa fa-spin fa-spinner"></i>
-    </wl-main-app>
-
-    <!-- build:js assets/lib.js -->
-
-    <!-- Non-module JS libs -->
-    <script src="../node_modules/jquery/dist/jquery.js"></script>
-    <script src="/assets/jqueryui/jquery-ui.min.js"></script>
-    <script src="../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
-    <script src="http://d3js.org/d3.v3.min.js"></script>
-    <script src="/assets/scripts/wordcloud.js"></script>
-
-    <!-- Polyfill(s) for older browsers -->
-    <script src="../node_modules/core-js/client/shim.min.js"></script>
-
-    <!-- Load libraries -->
-    <script src="../node_modules/zone.js/dist/zone.js"></script>
-
-    <!-- endbuild -->
-
-    <!-- build:js assets/app.js -->
-    <script src="tmp/app/bundle.js"></script>
-    <!-- endbuild -->
-
-    <!-- build:remove -->
-    <script src="../node_modules/systemjs/dist/system.js"></script>
-    <script src="systemjs.conf.js"></script>
-    <script>
-      System.import('app/main.js')
-        .catch(function(err) { console.error(err); });
-    </script>
-    <!-- endbuild -->
-  </body>
+  </app-root>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</body>
 </html>

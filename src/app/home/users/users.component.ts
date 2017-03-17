@@ -5,9 +5,9 @@ import { UserService, DomainService, AlertService } from '../../services/index';
 import { AppSettings } from '../../app.settings';
 
 @Component({
-    moduleId: module.id,
-    selector: 'wl-users',
-    templateUrl: 'users.html'
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.css']
 })
 export class UsersComponent implements OnInit {
     users: User[] = [];

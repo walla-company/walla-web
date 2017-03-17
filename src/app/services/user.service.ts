@@ -12,11 +12,11 @@ export class UserService {
     getAll(domain_id: string = null, filterFn: (u: User) => boolean = null): Promise<User[]> {
         return new Promise<User[]>((resolve, reject) => {
             let query = 'school_identifier=' + domain_id + '&token=' + AppSettings.API_TOKEN;
-            let filter = {
-                academic_level: '=grad',
-                graduation_year: '=2017'
-            };
-            query += '&filter=' + JSON.stringify(filter);
+            // let filter = {
+            //     academic_level: '=grad',
+            //     graduation_year: '=2017'
+            // };
+            // query += '&filter=' + JSON.stringify(filter);
             this.http.get(AppSettings.API_ENDPOINT + '/get_users?' + query).map(res => res.json())
                 .subscribe(oUsers => {
                     let arrUsers: User[] = [];

@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+
+.center-fix {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center; }
+
+.main-spinner {
+  font-size: 3em;
+  color: cornflowerblue; }
+
+
+.ui-autocomplete {
+    max-height: 150px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+* html .ui-autocomplete {
+    height: 150px;
+}
+
+.panel-title {
+  font-weight: bold;
+  color: cornflowerblue;
+}
