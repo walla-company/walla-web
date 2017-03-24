@@ -4,5 +4,5 @@ export class Group {
     short_name: string;
     details: string;
     color: string;
-    member: any;
+    members: any;
 }

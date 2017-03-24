@@ -1,0 +1,23 @@
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green>.panel-heading {
+    color: #fff;
+    border-color: #5cb85c;
+    background-color: #5cb85c;
+}
+
+.panel-primary {
+    border-color: #337ab7;
+}
+
+.panel-primary>.panel-heading {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #337ab7;
+}
+
+.huge {
+    font-size: 40px;
+}

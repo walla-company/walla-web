@@ -1,126 +1,215 @@
 <div class="panel panel-default">
     <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-pencil"></i> Filter Users</h3>
-    </div>
-    <div class="panel-body">
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-10">
+                <h3 class="panel-title">
+                    <i class="fa fa-search"></i> Filter Users
+                </h3>
+            </div>
+            <div class="col-md-2 text-right">
+                <a (click)="filtersOpened = !filtersOpened" style="cursor: pointer;">
+                    <span class="fa" [class.fa-minus]="filtersOpened" [class.fa-plus]="!filtersOpened"></span>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body" *ngIf="filtersOpened">
+        <div class="row">
+            <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
+                    <input type="text" class="form-control" id="firstName" (appEnterKeypress)="loadPage()" [(ngModel)]="user.first_name">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
+                    <input type="text" class="form-control" id="lastName" (appEnterKeypress)="loadPage()" [(ngModel)]="user.last_name">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="advancedSearch">
                 <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="text" class="form-control" id="email" [(ngModel)]="user.email">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" (appEnterKeypress)="loadPage()" [(ngModel)]="user.email">
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-3" *ngIf="advancedSearch">
                 <div class="form-group">
                     <label for="email">Hometown</label>
-                    <input type="text" class="form-control" id="hometown" [(ngModel)]="user.hometown">
+                    <input type="text" class="form-control" id="hometown" (appEnterKeypress)="loadPage()" [(ngModel)]="user.hometown">
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row" *ngIf="advancedSearch">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" [(ngModel)]="user.description">
+                    <input type="text" class="form-control" id="description" (appEnterKeypress)="loadPage()" [(ngModel)]="user.description">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="major">Major</label>
-                    <input type="text" class="form-control" id="major" [(ngModel)]="user.major">
+                    <input type="text" class="form-control" id="major" (appEnterKeypress)="loadPage()" [(ngModel)]="user.major">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="graduation_year">Graduation Year</label>
-                    <input type="text" class="form-control" id="graduation_year" [(ngModel)]="user.graduation_year">
+                    <input type="text" class="form-control" id="graduation_year" (appEnterKeypress)="loadPage()" [(ngModel)]="user.graduation_year">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="academic_level">Academic Level</label>
                     <select class="form-control" id="academic_level" [(ngModel)]="user.academic_level">
-                        <option value="grad">Graduated</option>
-                        <option value="undergrad">Undergraduated</option>
+                        <option value="grad">Graduate/Professional</option>
+                        <option value="undergrad">Undergraduate</option>
                     </select>
                 </div>
             </div>
         </div>
+        <div class="row" *ngIf="advancedSearch">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="academic_level">Verified</label>
+                    <select class="form-control" id="verified" [(ngModel)]="user.verified">
+                        <option [value]="1">Verified User</option>
+                        <option [value]="0">Unverified User</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="selGroup">Group</label>
+                    <input class="form-control" type="text" id="selGroup" placeholder="Start typing to autocomplete" *ngIf="!selectedGroup" />
+                    <div class="input-group" *ngIf="selectedGroup">
+                        <input type="text" class="form-control" [(ngModel)]="selectedGroup.name" disabled="disabled">
+                        <div class="input-group-addon">
+                            <a class="remove-group" (click)="removeSelectedGroup()"><i class="fa fa-close"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="col-md-3 text-left" *ngIf="selectedGroup">
+                <label>Selected group:</label>
+                <h3>{{selectedGroup.name}}</h3>
+                <button type="button" class="btn btn-danger" (click)="removeSelectedGroup()"><i class="fa fa-close"></i> Remove</button>
+            </div>-->
+        </div>
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="profile_image_url">Profile Image Url</label>
-                    <input type="text" class="form-control" id="profile_image_url" [(ngModel)]="user.profile_image_url">
+                    <button type="button" class="btn btn-primary" (click)="loadPage()">
+                        Search
+                    </button>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" id="verified" [(ngModel)]="user.verified"> Verified
-                    </label>
-                </div>
+            <div class="col-md-6 text-right">
+                <a (click)="advancedSearch = !advancedSearch" style="cursor: pointer;">
+                    {{(advancedSearch ? 'Basic Search' : 'Advanced Search')}}
+                </a>
             </div>
         </div>
     </div>
 </div>
+<i class="main-spinner center-fix fa fa-spin fa-spinner" *ngIf="loading"></i>
 
-<div class="panel panel-default">
+<div class="panel panel-default" *ngIf="!loading">
     <div class="panel-heading">
         <h3 class="panel-title"><i class="fa fa-user"></i> Users</h3>
     </div>
     <div class="panel-body">
-        <div [class.text-center]="loading">
-            <i class="main-spinner fa fa-spin fa-spinner" *ngIf="loading"></i>
-            <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
-                <thead>
-                    <tr>
-                        <th style="width: 20%">
-                            <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
-                        </th>
-                        <th style="width: 40%">
-                            <mfDefaultSorter by="email">Email</mfDefaultSorter>
-                        </th>
-                        <th style="width: 20%">
-                            <mfDefaultSorter by="hometown">City</mfDefaultSorter>
-                        </th>
-                        <th style="width: 20%">
-                            Actions
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of mf.data">
-                        <td>{{user.first_name}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.hometown}}</td>
-                        <td>
-                            <a class="btn btn-primary" [routerLink]="['edit', user.user_id]" title="Edit"><span class="fa fa-pencil"></span></a>
-                        </td>
-                    </tr>
-                    <tr *ngIf="!mf.data.length">
-                        <td colspan="4">There is no users to show.</td>
-                    </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="4">
-                            <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
-                        </td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+
+        <tabset>
+            <tab (select)="tab = 0" [active]="tab === 0" heading="List">
+                <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
+                    <thead>
+                        <tr>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
+                            </th>
+                            <th style="width: 40%">
+                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            </th>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="hometown">City</mfDefaultSorter>
+                            </th>
+                            <th style="width: 20%">
+                                Actions
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of mf.data">
+                            <td>{{user.first_name}} {{user.last_name}}</td>
+                            <td>{{user.email}}</td>
+                            <td>{{user.hometown}}</td>
+                            <td>
+                                <a class="btn btn-primary" [routerLink]="['edit', user.user_id]" title="Edit"><span class="fa fa-pencil"></span></a>
+                            </td>
+                        </tr>
+                        <tr *ngIf="!mf.data.length">
+                            <td colspan="4">There is no users to show.</td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="4">
+                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                            </td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </tab>
+
+            <tab (select)="tab = 1" [active]="tab === 1" heading="Users over time" *ngIf="analytics">
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-4 text-left">
+                        <div class="form-group">
+                                <my-date-picker (dateChanged)="onDateChanged($event)"
+                                [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        <tabset type="pills">
+                            <tab *ngFor="let chart of over_time_charts"
+                                [heading]="chart.label"
+                                [active]="analytics.sessions_over_time_chart.selected_chart === chart.field"
+                                (select)="analytics.sessions_over_time_chart.selected_chart = chart.field"
+                                [disabled]="!analytics.sessions_over_time_chart[chart.field]">
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12" *ngIf="analytics.sessions_over_time_chart.selected_chart">
+                        <div *ngFor="let chart of over_time_charts">
+                            <app-chart minHeight="500px" *ngIf="analytics.sessions_over_time_chart.selected_chart === chart.field"
+                                [chartData]="analytics.sessions_over_time_chart[chart.field]"></app-chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-left" *ngIf="!analytics.sessions_over_time_chart.selected_chart">
+                        There's no session data to show with the selected date range.
+                    </div>
+                </div>
+                <!--<hr />-->
+            </tab>
+            <tab (select)="tab = 2" [active]="tab === 2" heading="Academic Level" *ngIf="analytics?.grad_undergrad_chart">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-12">
+                        <app-chart minHeight="500px" [chartData]="analytics.grad_undergrad_chart"></app-chart>
+                    </div>
+                </div>
+            </tab>
+            <tab (select)="tab = 3" [active]="tab === 3" heading="Graduation Year" *ngIf="analytics?.grad_year_chart">
+                <app-chart minHeight="500px" [chartData]="analytics.grad_year_chart"></app-chart>
+            </tab>
+            <tab (select)="tab = 4" [active]="tab === 4" heading="Fields of Study" *ngIf="analytics?.fields_of_study_chart">
+                <app-word-cloud [words]="analytics.fields_of_study_chart"></app-word-cloud>
+            </tab>
+        </tabset>
+
     </div>
 </div>

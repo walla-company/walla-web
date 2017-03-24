@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
 import * as moment from 'moment';
-import 'rxjs/add/operator/map';
 
 import { environment } from '../../environments/environment';
 import { Colors } from '../helpers/colors';
@@ -105,7 +104,6 @@ export class DashboardService {
                         });
                         const values = list.map(o => o.count);
                         return {
-                            a: field,
                             type: 'line',
                             data: {
                                 labels: labels,
@@ -128,6 +126,17 @@ export class DashboardService {
                                         borderCapStyle: 'butt'
                                     }
                                 ]
+                            },
+                            options: {
+                                scales: {
+                                    yAxes: [
+                                        {
+                                            ticks: {
+                                                beginAtZero: true
+                                            }
+                                        }
+                                    ]
+                                }
                             }
                         };
                     };
@@ -300,6 +309,21 @@ export class DashboardService {
                     resolve(data);
 
                 }, err => reject(err.message));
+        });
+    }
+
+    getDashboardData(domain_id: string) {
+        return new Promise<any>((resolve, reject) => {
+            let query = 'token=' + environment.API_TOKEN;
+            query += '&school_identifier=' + domain_id;
+
+            this.http.get(environment.API_ENDPOINT + '/get_dashboard_data?' + query).map(res => res.json())
+            .subscribe(data => {
+                // events_avg_planning_time
+                data.events_avg_planning_time = moment.duration(data.events_avg_planning_time, 'seconds').humanize();
+                data.avg_session_duration = moment.duration(data.avg_session_duration, 'seconds').humanize();
+                resolve(data);
+            });
         });
     }
 }

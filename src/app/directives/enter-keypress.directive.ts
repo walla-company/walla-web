@@ -4,11 +4,11 @@ import { Directive, HostListener, Output, EventEmitter } from '@angular/core';
   selector: '[appEnterKeypress]'
 })
 export class EnterKeypressDirective {
-  @Output() wlEnterKeypress: EventEmitter<any> = new EventEmitter();
+  @Output() appEnterKeypress: EventEmitter<any> = new EventEmitter();
 
   @HostListener('keydown', ['$event']) keydown(event: KeyboardEvent) {
       if (event.keyCode === 13) {
-          this.wlEnterKeypress.emit();
+          this.appEnterKeypress.emit();
       }
   }
 }

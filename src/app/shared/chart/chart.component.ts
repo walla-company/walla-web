@@ -4,14 +4,20 @@ declare const Chart;
 
 @Component({
   selector: 'app-chart',
-  template: '<chart [type]="chartData.type" [data]="chartData.data" [options]="chartData.options"></chart>'
+  template: '<div [style.min-height]="minHeight"><chart [type]="chartData.type" [data]="chartData.data" [options]="chartData.options"></chart></div>',
+  styles: [
+      `div.chart-container {
+        height: 100px;
+       }`
+  ]
 })
 export class ChartComponent {
 @Input() chartData: any = {};
+@Input() minHeight: string;
 
 constructor() {
     Chart.pluginService.register({
-        afterInit: function(chart) {
+        beforeDraw: function(chart) {
             if (chart.config.type !== 'line' || !chart.scales['x-axis-0'] || !chart.scales['x-axis-0'].ticks) {
                 return;
             }
