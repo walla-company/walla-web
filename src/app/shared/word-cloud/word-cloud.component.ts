@@ -28,8 +28,8 @@ export class WordCloudComponent implements OnInit {
       WordCloud(this.target.nativeElement, {
           gridSize: Math.round(16 * this.width / 1024),
           fontFamily: 'Times, serif',
-          rotateRatio: 0.5,
-          rotationSteps: 2,
+          rotateRatio: 0,
+          rotationSteps: 0,
           list: outArray,
           minSize: 10
       });

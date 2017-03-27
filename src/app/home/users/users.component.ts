@@ -46,7 +46,7 @@ export class UsersComponent implements OnInit {
     selectedGroup: Group;
 
     filtersOpened = true;
-    advancedSearch = true;
+    advancedSearch = false;
 
     tab: number = 0;
 
@@ -154,7 +154,7 @@ export class UsersComponent implements OnInit {
     }
 
     loadAnalytics(): Promise<any> {
-        return this.userService.getUserAnalytics(this.currentDomain, null, this.getFilter())
+        return this.userService.getUserAnalytics(this.currentDomain, this.selected_date.jsdate, this.getFilter())
             .then(analytics => this.analytics = analytics);
     }
 

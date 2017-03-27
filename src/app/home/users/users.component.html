@@ -123,7 +123,7 @@
 
         <tabset>
             <tab (select)="tab = 0" [active]="tab === 0" heading="List">
-                <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="5" *ngIf="!loading">
+                <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="10" *ngIf="!loading">
                     <thead>
                         <tr>
                             <th style="width: 30%">
@@ -157,7 +157,7 @@
                     <tfoot>
                         <tr>
                             <td colspan="4">
-                                <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                                <mfBootstrapPaginator [rowsOnPageSet]="[10,20,100]"></mfBootstrapPaginator>
                             </td>
                         </tr>
                     </tfoot>
@@ -184,7 +184,7 @@
                         </tabset>
                     </div>
                 </div>
-                <div class="row">
+                <div class="row" style="min-height: 500px;">
                     <div class="col-lg-12" *ngIf="analytics.sessions_over_time_chart.selected_chart">
                         <div *ngFor="let chart of over_time_charts">
                             <app-chart minHeight="500px" *ngIf="analytics.sessions_over_time_chart.selected_chart === chart.field"

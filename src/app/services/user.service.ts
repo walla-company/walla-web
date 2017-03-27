@@ -154,7 +154,7 @@ export class UserService {
                     data.sessions_over_time_chart.sessions_by_month = getChartData('sessions_by_month');
                     data.sessions_over_time_chart.sessions_by_year = getChartData('sessions_by_year');
 
-                    const notEmptyChart = Object.keys(data.sessions_over_time_chart).reverse()
+                    const notEmptyChart = Object.keys(data.sessions_over_time_chart)
                                                 .filter(k => data.sessions_over_time_chart[k])[0];
 
                     if (notEmptyChart) {
