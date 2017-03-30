@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
-import * as moment_tz from 'moment-timezone';
+import * as moment from 'moment';
+
 
 import { User } from '../models/index';
 import { AppSettings } from '../app.settings';
@@ -34,10 +35,8 @@ export class UserService {
         return new Promise<any>((resolve, reject) => {
             let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
 
-            query += '&timezone=' + moment_tz.tz.guess();
-
             if (date)
-                query += '&date=' + date.toISOString();
+                query += '&date=' + moment(date).format();
 
             if (filter)
                 query += '&filter=' + JSON.stringify(filter);
