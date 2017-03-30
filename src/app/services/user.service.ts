@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Http, Headers, RequestOptions, Response } from '@angular/http';
+import * as moment_tz from 'moment-timezone';
 import * as moment from 'moment';
 
 
@@ -34,6 +35,8 @@ export class UserService {
     getUserAnalytics(domain_id: string = null, date: Date = null, filter: any = null): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+
+            query += '&timezone=' + moment_tz.tz.guess();
 
             if (date)
                 query += '&date=' + moment(date).format();
