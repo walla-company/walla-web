@@ -13,4 +13,5 @@ export class User {
     time_created: number;
     verified: boolean;
     hash: string;
+    suspended: boolean;
 }

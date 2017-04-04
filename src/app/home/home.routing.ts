@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { UsersRoutes } from './users/users.routing';
-import { PostsRoutes } from './posts/posts.routing';
+import { ActivitiesRoutes } from './activities/activities.routing';
 import { DashboardRoutes } from './dashboard/dashboard.routing';
 
 export const HomeRoutes: Routes = [
@@ -11,7 +11,7 @@ export const HomeRoutes: Routes = [
     component: HomeComponent,
     children: [
       ...UsersRoutes,
-      ...PostsRoutes,
+      ...ActivitiesRoutes,
       ...DashboardRoutes,
       { path: '**', redirectTo: 'dashboard' }
     ]

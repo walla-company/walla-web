@@ -9,9 +9,13 @@ import { environment } from '../../environments/environment';
 export class ActivityService {
     constructor(private http: Http) { }
 
-    getAll(domain_id: string = null): Promise<Activity[]> {
+    getAll(domain_id: string = null, filter: any = null): Promise<Activity[]> {
         return new Promise<Activity[]>((resolve, reject) => {
             let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+
+            if (filter)
+                query += '&filter=' + JSON.stringify(filter);
+                
             this.http.get(environment.API_ENDPOINT + '/get_activities?' + query).map(res => res.json())
                 .subscribe(arr => resolve(<any[]> arr), err => reject(err.message));
         });

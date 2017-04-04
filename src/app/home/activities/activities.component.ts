@@ -2,23 +2,23 @@ import { Component, OnInit, NgZone } from '@angular/core';
 import { IMyOptions, IMyDateModel } from 'mydatepicker';
 import * as moment from 'moment';
 
-import { User, Domain, Group } from '../../models/index';
-import { UserService, DomainService, AlertService, GroupService } from '../../services/index';
+import { Activity, Domain, Group } from '../../models/index';
+import { ActivityService, DomainService, AlertService, GroupService } from '../../services/index';
 import { AppSettings } from '../../app.settings';
 
 declare var jQuery;
 
 @Component({
-  selector: 'app-users',
-  templateUrl: './users.component.html',
-  styleUrls: ['./users.component.css']
+  selector: 'app-activities',
+  templateUrl: './activities.component.html',
+  styleUrls: ['./activities.component.css']
 })
-export class UsersComponent implements OnInit {
+export class ActivitiesComponent implements OnInit {
     loading: boolean = false;
     currentDomain: string;
 
-    users: User[] = [];
-    user: User = new User();
+    activities: Activity[] = [];
+    activity: Activity = new Activity();
 
     analytics: any;
 
@@ -60,7 +60,7 @@ export class UsersComponent implements OnInit {
         showClearDateBtn: false
     };
 
-    constructor (private userService: UserService,
+    constructor (private activityService: ActivityService,
                  private groupService: GroupService,
                  private domainService: DomainService,
                  private alertService: AlertService,
@@ -83,7 +83,7 @@ export class UsersComponent implements OnInit {
     onDateChanged(event: IMyDateModel) {
         this.selected_date = event;
         this.loading = true;
-        this.loadAnalytics().then(() => this.loading = false);
+        // this.loadAnalytics().then(() => this.loading = false);
     }
 
     setAutoComplete() {
@@ -129,33 +129,33 @@ export class UsersComponent implements OnInit {
 
     getFilter() {
         let filter;
-        if (this.filtersOpened) {
-            filter = {
-                first_name: this.user.first_name,
-                last_name: this.user.last_name
-            };
-            if (this.advancedSearch) {
-                filter = Object.assign(filter, {
-                    email: this.user.email,
-                    hometown: this.user.hometown,
-                    description: this.user.description,
-                    major: this.user.major,
-                    graduation_year: '=' + (this.user.graduation_year || ''),
-                    academic_level: '=' + (this.user.academic_level || ''),
-                    verified: this.user.verified === undefined ? undefined : (Number(this.user.verified) === 1),
-                    flagged: this.flagged === undefined ? undefined : (Number(this.flagged) === 1),
-                    group: (this.selectedGroup || <any>{}).group_id
-                });
-            }
-        }
+        // if (this.filtersOpened) {
+        //     filter = {
+        //         first_name: this.activity.first_name,
+        //         last_name: this.activity.last_name
+        //     };
+        //     if (this.advancedSearch) {
+        //         filter = Object.assign(filter, {
+        //             email: this.activity.email,
+        //             hometown: this.activity.hometown,
+        //             description: this.activity.description,
+        //             major: this.activity.major,
+        //             graduation_year: '=' + (this.activity.graduation_year || ''),
+        //             academic_level: '=' + (this.activity.academic_level || ''),
+        //             verified: this.activity.verified === undefined ? undefined : (Number(this.activity.verified) === 1),
+        //             flagged: this.flagged === undefined ? undefined : (Number(this.flagged) === 1),
+        //             group: (this.selectedGroup || <any>{}).group_id
+        //         });
+        //     }
+        // }
         return filter;
     }
 
-    loadUsers(): Promise<any> {
-        return this.userService.getAll(this.currentDomain, this.getFilter()).then(users => this.users = users);
-        // .then(users => {
-        //     const lis = users.map(u => u.suspended);
-        //     console.log(users.filter(u => u.suspended === true));
+    loadActivities(): Promise<any> {
+        return this.activityService.getAll(this.currentDomain, this.getFilter()).then(activities => this.activities = activities);
+        // .then(activities => {
+        //     const lis = activities.map(u => u.suspended);
+        //     console.log(activities.filter(u => u.suspended === true));
         //     const log = v => console.log(lis.filter(i => i === v).length, lis.filter(i => i === v));
         //     log(true);
         //     log(false);
@@ -163,26 +163,26 @@ export class UsersComponent implements OnInit {
         // });
     }
 
-    loadAnalytics(): Promise<any> {
-        return this.userService.getUserAnalytics(this.currentDomain, this.selected_date.jsdate, this.getFilter())
-            .then(analytics => this.analytics = analytics);
-    }
+    // loadAnalytics(): Promise<any> {
+    //     return this.activityService.getActivityAnalytics(this.currentDomain, this.selected_date.jsdate, this.getFilter())
+    //         .then(analytics => this.analytics = analytics);
+    // }
 
     loadPage() {
         this.loading = true;
-        Promise.all([this.loadUsers(), this.loadAnalytics()]).then(() => this.loading = false, () => {
-            this.alertService.error('Could load users data.');
-            this.loading = false;
-        });
+        // Promise.all([this.loadActivities(), this.loadAnalytics()]).then(() => this.loading = false, () => {
+        //     this.alertService.error('Could load activities data.');
+        //     this.loading = false;
+        // });
     }
 
     loadGroups() {
         this.groupService.getAll(this.currentDomain).then(groups => this.groups = groups.filter(g => Object.keys(g.members || {}).length));
     }
 
-    changeSuspension(user: User, suspended: boolean) {
-        this.userService.changeUserSuspension(user.user_id, this.currentDomain, suspended).then(() => {
-            user.suspended = suspended;
-        });
+    changeSuspension(activity: Activity, suspended: boolean) {
+        // this.activityService.changeActivitySuspension(activity.activity_id, this.currentDomain, suspended).then(() => {
+        //     activity.suspended = suspended;
+        // });
     }
 }

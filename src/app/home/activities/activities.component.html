@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-md-10">
                 <h3 class="panel-title">
-                    <i class="fa fa-search"></i> Filter Users
+                    <i class="fa fa-search"></i> Filter Activities
                 </h3>
             </div>
             <div class="col-md-2 text-right">
@@ -18,25 +18,25 @@
             <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
                 <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" (appEnterKeypress)="loadPage()" [(ngModel)]="user.first_name">
+                    <input type="text" class="form-control" id="firstName" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.first_name">
                 </div>
             </div>
             <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
                 <div class="form-group">
                     <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" (appEnterKeypress)="loadPage()" [(ngModel)]="user.last_name">
+                    <input type="text" class="form-control" id="lastName" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.last_name">
                 </div>
             </div>
             <div class="col-md-3" *ngIf="advancedSearch">
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" (appEnterKeypress)="loadPage()" [(ngModel)]="user.email">
+                    <input type="text" class="form-control" id="email" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.email">
                 </div>
             </div>
             <div class="col-md-3" *ngIf="advancedSearch">
                 <div class="form-group">
                     <label for="email">Hometown</label>
-                    <input type="text" class="form-control" id="hometown" (appEnterKeypress)="loadPage()" [(ngModel)]="user.hometown">
+                    <input type="text" class="form-control" id="hometown" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.hometown">
                 </div>
             </div>
         </div>
@@ -44,25 +44,25 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <input type="text" class="form-control" id="description" (appEnterKeypress)="loadPage()" [(ngModel)]="user.description">
+                    <input type="text" class="form-control" id="description" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.description">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="major">Major</label>
-                    <input type="text" class="form-control" id="major" (appEnterKeypress)="loadPage()" [(ngModel)]="user.major">
+                    <input type="text" class="form-control" id="major" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.major">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="graduation_year">Graduation Year</label>
-                    <input type="text" class="form-control" id="graduation_year" (appEnterKeypress)="loadPage()" [(ngModel)]="user.graduation_year">
+                    <input type="text" class="form-control" id="graduation_year" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.graduation_year">
                 </div>
             </div>
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="academic_level">Academic Level</label>
-                    <select class="form-control" id="academic_level" [(ngModel)]="user.academic_level">
+                    <select class="form-control" id="academic_level" [(ngModel)]="activity.academic_level">
                         <option value="grad">Graduate/Professional</option>
                         <option value="undergrad">Undergraduate</option>
                     </select>
@@ -73,9 +73,9 @@
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="verified">Verified</label>
-                    <select class="form-control" id="verified" [(ngModel)]="user.verified">
-                        <option [value]="1">Verified User</option>
-                        <option [value]="0">Unverified User</option>
+                    <select class="form-control" id="verified" [(ngModel)]="activity.verified">
+                        <option [value]="1">Verified Activity</option>
+                        <option [value]="0">Unverified Activity</option>
                     </select>
                 </div>
             </div>
@@ -95,8 +95,8 @@
                 <div class="form-group">
                     <label for="flagged">Flagged</label>
                     <select class="form-control" id="flagged" [(ngModel)]="flagged">
-                        <option [value]="1">Only flagged users</option>
-                        <option [value]="0">All users</option>
+                        <option [value]="1">Only flagged activities</option>
+                        <option [value]="0">All activities</option>
                     </select>
                 </div>
             </div>
@@ -126,13 +126,13 @@
 
 <div class="panel panel-default" *ngIf="!loading">
     <div class="panel-heading">
-        <h3 class="panel-title"><i class="fa fa-user"></i> Users</h3>
+        <h3 class="panel-title"><i class="fa fa-activity"></i> Activities</h3>
     </div>
     <div class="panel-body">
 
         <tabset>
             <tab (select)="tab = 0" [active]="tab === 0" heading="List">
-                <table class="table table-striped" [mfData]="users" #mf="mfDataTable" [mfRowsOnPage]="10" *ngIf="!loading">
+                <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="10" *ngIf="!loading">
                     <thead>
                         <tr>
                             <th style="width: 30%">
@@ -153,23 +153,23 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of mf.data">
-                            <td>{{user.first_name}} {{user.last_name}}</td>
-                            <td>{{user.email}}</td>
-                            <td>{{user.hometown}}</td>
+                        <tr *ngFor="let activity of mf.data">
+                            <td>{{activity.first_name}} {{activity.last_name}}</td>
+                            <td>{{activity.email}}</td>
+                            <td>{{activity.hometown}}</td>
                             <td>
-                                <span class="fa" [class.fa-check]="user.suspended" [class.fa-close]="!user.suspended"></span>
+                                <span class="fa" [class.fa-check]="activity.suspended" [class.fa-close]="!activity.suspended"></span>
                             </td>
                             <!-- @Bihan, please put your 'See details' button here -->
                             <td>
-                                <!--<a class="btn btn-primary" [routerLink]="['edit', user.user_id]" title="Edit"><span class="fa fa-pencil"></span></a>-->
-                                <a class="btn btn-primary" (click)="changeSuspension(user, !user.suspended)" [title]="user.suspended ? 'Remove user suspension' : 'Suspend user'">
-                                    <span class="fa" [class.fa-thumbs-up]="user.suspended" [class.fa-thumbs-down]="!user.suspended"></span>
+                                <!--<a class="btn btn-primary" [routerLink]="['edit', activity.activity_id]" title="Edit"><span class="fa fa-pencil"></span></a>-->
+                                <a class="btn btn-primary" (click)="changeSuspension(activity, !activity.suspended)" [title]="activity.suspended ? 'Remove activity suspension' : 'Suspend activity'">
+                                    <span class="fa" [class.fa-thumbs-up]="activity.suspended" [class.fa-thumbs-down]="!activity.suspended"></span>
                                 </a>
                             </td>
                         </tr>
                         <tr *ngIf="!mf.data.length">
-                            <td colspan="4">There is no users to show.</td>
+                            <td colspan="4">There is no activities to show.</td>
                         </tr>
                     </tbody>
                     <tfoot>
@@ -182,7 +182,7 @@
                 </table>
             </tab>
 
-            <tab (select)="tab = 1" [active]="tab === 1" heading="Users over time" *ngIf="analytics">
+            <tab (select)="tab = 1" [active]="tab === 1" heading="Activities over time" *ngIf="analytics">
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-lg-4 text-left">

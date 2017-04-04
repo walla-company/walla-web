@@ -24,6 +24,7 @@ export class UserService {
                     let arrUsers: User[] = [];
                     for (let k in oUsers) {
                         if (oUsers.hasOwnProperty(k) && (!filterFn || filterFn(oUsers[k]))) {
+                            oUsers[k].suspended = !!oUsers[k].suspended;
                             arrUsers.push(oUsers[k]);
                         }
                     }
@@ -179,6 +180,19 @@ export class UserService {
     //             .subscribe(arr => resolve(<User[]> arr), err => reject(err.message));
     //     });
     // }
+
+    changeUserSuspension(uid: string, domain_id: string, suspended: boolean): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            let obj = {
+                school_identifier: domain_id,
+                uid,
+                suspended
+            };
+            let query = 'token=' + environment.API_TOKEN;
+            this.http.post(environment.API_ENDPOINT + '/change_user_suspension?' + query, obj)
+                .subscribe(u => resolve(), err => reject(err.message));
+        });
+    }
 
     getById(uid: string, domain_id: string): Promise<User> {
         return new Promise<User>((resolve, reject) => {
