@@ -152,7 +152,7 @@
                     <tbody>
                         <tr *ngFor="let activity of mf.data">
                             <td>{{activity.title}}</td>
-                            <td>{{activity.start_time * 1000 | date}} {{activity.start_time}}</td>
+                            <td>{{activity.start_time * 1000 | date}}</td>
                             <td>{{(activity.public ? 'Public' : 'Private')}}</td>
                         </tr>
                         <tr *ngIf="!mf.data.length">
