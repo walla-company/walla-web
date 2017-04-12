@@ -178,7 +178,7 @@
                 </table>
             </tab>
 
-            <tab (select)="tab = 1" [active]="tab === 1" heading="Users over time" *ngIf="analytics">
+            <tab (select)="tab = 1" [active]="tab === 1" heading="Users over time" *ngIf="analytics?.sessions_over_time_chart">
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-lg-4 text-left">

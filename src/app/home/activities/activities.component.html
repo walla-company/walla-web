@@ -15,33 +15,36 @@
     </div>
     <div class="panel-body" *ngIf="filtersOpened">
         <div class="row">
-            <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.first_name">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" id="title" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.title">
                 </div>
             </div>
-            <div [class.col-md-6]="!advancedSearch" [class.col-md-3]="advancedSearch">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="lastName">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.last_name">
+                    <label for="start_time">From</label>
+                    <my-date-picker id="start_time" (dateChanged)="setStartTime($event)" [options]="date_filter_options"></my-date-picker>
                 </div>
             </div>
-            <div class="col-md-3" *ngIf="advancedSearch">
+            <div class="col-md-4">
                 <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="text" class="form-control" id="email" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.email">
-                </div>
-            </div>
-            <div class="col-md-3" *ngIf="advancedSearch">
-                <div class="form-group">
-                    <label for="email">Hometown</label>
-                    <input type="text" class="form-control" id="hometown" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.hometown">
+                    <label for="end_time">To</label>
+                    <my-date-picker id="end_time" (dateChanged)="setEndTime($event)" [options]="date_filter_options"></my-date-picker>
                 </div>
             </div>
         </div>
         <div class="row" *ngIf="advancedSearch">
             <div class="col-md-3">
+                <div class="form-group">
+                    <label for="flagged">Flagged</label>
+                    <select class="form-control" id="flagged" [(ngModel)]="flagged">
+                        <option [value]="1">Activity flagged</option>
+                        <option [value]="0">Activity not flagged</option>
+                    </select>
+                </div>
+            </div>
+            <!--<div class="col-md-3">
                 <div class="form-group">
                     <label for="description">Description</label>
                     <input type="text" class="form-control" id="description" (appEnterKeypress)="loadPage()" [(ngModel)]="activity.description">
@@ -67,9 +70,9 @@
                         <option value="undergrad">Undergraduate</option>
                     </select>
                 </div>
-            </div>
+            </div>-->
         </div>
-        <div class="row" *ngIf="advancedSearch">
+        <!--<div class="row" *ngIf="advancedSearch">
             <div class="col-md-3">
                 <div class="form-group">
                     <label for="verified">Verified</label>
@@ -100,12 +103,12 @@
                     </select>
                 </div>
             </div>
-            <!--<div class="col-md-3 text-left" *ngIf="selectedGroup">
+            <div class="col-md-3 text-left" *ngIf="selectedGroup">
                 <label>Selected group:</label>
                 <h3>{{selectedGroup.name}}</h3>
                 <button type="button" class="btn btn-danger" (click)="removeSelectedGroup()"><i class="fa fa-close"></i> Remove</button>
-            </div>-->
-        </div>
+            </div>
+        </div>-->
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
@@ -135,38 +138,22 @@
                 <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="10" *ngIf="!loading">
                     <thead>
                         <tr>
-                            <th style="width: 30%">
-                                <mfDefaultSorter by="first_name">Name</mfDefaultSorter>
+                            <th style="width: 45%">
+                                <mfDefaultSorter by="title">Activity</mfDefaultSorter>
                             </th>
-                            <th style="width: 25%">
-                                <mfDefaultSorter by="email">Email</mfDefaultSorter>
+                            <th style="width: 40%">
+                                <mfDefaultSorter by="start_time">At</mfDefaultSorter>
                             </th>
                             <th style="width: 15%">
-                                <mfDefaultSorter by="hometown">City</mfDefaultSorter>
-                            </th>
-                            <th style="width: 10%">
-                                <mfDefaultSorter by="suspended">Suspended</mfDefaultSorter>
-                            </th>
-                            <th style="width: 20%">
-                                Actions
+                                <mfDefaultSorter by="public">Privacy</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr *ngFor="let activity of mf.data">
-                            <td>{{activity.first_name}} {{activity.last_name}}</td>
-                            <td>{{activity.email}}</td>
-                            <td>{{activity.hometown}}</td>
-                            <td>
-                                <span class="fa" [class.fa-check]="activity.suspended" [class.fa-close]="!activity.suspended"></span>
-                            </td>
-                            <!-- @Bihan, please put your 'See details' button here -->
-                            <td>
-                                <!--<a class="btn btn-primary" [routerLink]="['edit', activity.activity_id]" title="Edit"><span class="fa fa-pencil"></span></a>-->
-                                <a class="btn btn-primary" (click)="changeSuspension(activity, !activity.suspended)" [title]="activity.suspended ? 'Remove activity suspension' : 'Suspend activity'">
-                                    <span class="fa" [class.fa-thumbs-up]="activity.suspended" [class.fa-thumbs-down]="!activity.suspended"></span>
-                                </a>
-                            </td>
+                            <td>{{activity.title}}</td>
+                            <td>{{activity.start_time * 1000 | date}} {{activity.start_time}}</td>
+                            <td>{{(activity.public ? 'Public' : 'Private')}}</td>
                         </tr>
                         <tr *ngIf="!mf.data.length">
                             <td colspan="4">There is no activities to show.</td>
@@ -182,7 +169,7 @@
                 </table>
             </tab>
 
-            <tab (select)="tab = 1" [active]="tab === 1" heading="Activities over time" *ngIf="analytics">
+            <tab (select)="tab = 1" [active]="tab === 1" heading="Event posting over time" *ngIf="analytics?.event_posting_over_time">
                 <div class="row">&nbsp;</div>
                 <div class="row">
                     <div class="col-lg-4 text-left">
@@ -195,38 +182,112 @@
                         <tabset type="pills">
                             <tab *ngFor="let chart of over_time_charts"
                                 [heading]="chart.label"
-                                [active]="analytics.sessions_over_time_chart.selected_chart === chart.field"
-                                (select)="analytics.sessions_over_time_chart.selected_chart = chart.field"
-                                [disabled]="!analytics.sessions_over_time_chart[chart.field]">
+                                [active]="analytics.event_posting_over_time.selected_chart === chart.field"
+                                (select)="analytics.event_posting_over_time.selected_chart = chart.field"
+                                [disabled]="!analytics.event_posting_over_time[chart.field]">
                             </tab>
                         </tabset>
                     </div>
                 </div>
                 <div class="row" style="min-height: 500px;">
-                    <div class="col-lg-12" *ngIf="analytics.sessions_over_time_chart.selected_chart">
+                    <div class="col-lg-12" *ngIf="analytics.event_posting_over_time.selected_chart">
                         <div *ngFor="let chart of over_time_charts">
-                            <app-chart minHeight="500px" *ngIf="analytics.sessions_over_time_chart.selected_chart === chart.field"
-                                [chartData]="analytics.sessions_over_time_chart[chart.field]"></app-chart>
+                            <app-chart minHeight="500px" *ngIf="analytics.event_posting_over_time.selected_chart === chart.field"
+                                [chartData]="analytics.event_posting_over_time[chart.field]"></app-chart>
                         </div>
                     </div>
-                    <div class="col-lg-12 text-left" *ngIf="!analytics.sessions_over_time_chart.selected_chart">
-                        There's no session data to show with the selected date range.
+                    <div class="col-lg-12 text-left" *ngIf="!analytics.event_posting_over_time.selected_chart">
+                        There's no event data to show with the selected date range.
                     </div>
                 </div>
-                <!--<hr />-->
             </tab>
-            <tab (select)="tab = 2" [active]="tab === 2" heading="Academic Level" *ngIf="analytics?.grad_undergrad_chart">
+
+            <tab (select)="tab = 2" [active]="tab === 2" heading="Event time over time" *ngIf="analytics?.event_time_over_time">
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-4 text-left">
+                        <div class="form-group">
+                                <my-date-picker (dateChanged)="onDateChanged($event)"
+                                [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        <tabset type="pills">
+                            <tab *ngFor="let chart of over_time_charts"
+                                [heading]="chart.label"
+                                [active]="analytics.event_time_over_time.selected_chart === chart.field"
+                                (select)="analytics.event_time_over_time.selected_chart = chart.field"
+                                [disabled]="!analytics.event_time_over_time[chart.field]">
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <div class="row" style="min-height: 500px;">
+                    <div class="col-lg-12" *ngIf="analytics.event_time_over_time.selected_chart">
+                        <div *ngFor="let chart of over_time_charts">
+                            <app-chart minHeight="500px" *ngIf="analytics.event_time_over_time.selected_chart === chart.field"
+                                [chartData]="analytics.event_time_over_time[chart.field]"></app-chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-left" *ngIf="!analytics.event_time_over_time.selected_chart">
+                        There's no event data to show with the selected date range.
+                    </div>
+                </div>
+            </tab>
+
+            <tab (select)="tab = 3" [active]="tab === 3" heading="Event attendance over time" *ngIf="analytics?.event_attendance_over_time">
+                <div class="row">&nbsp;</div>
+                <div class="row">
+                    <div class="col-lg-4 text-left">
+                        <div class="form-group">
+                                <my-date-picker (dateChanged)="onDateChanged($event)"
+                                [(ngModel)]="selected_date" [options]="date_options"></my-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 text-left">
+                        <tabset type="pills">
+                            <tab *ngFor="let chart of over_time_charts"
+                                [heading]="chart.label"
+                                [active]="analytics.event_attendance_over_time.selected_chart === chart.field"
+                                (select)="analytics.event_attendance_over_time.selected_chart = chart.field"
+                                [disabled]="!analytics.event_attendance_over_time[chart.field]">
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+                <div class="row" style="min-height: 500px;">
+                    <div class="col-lg-12" *ngIf="analytics.event_attendance_over_time.selected_chart">
+                        <div *ngFor="let chart of over_time_charts">
+                            <app-chart minHeight="500px" *ngIf="analytics.event_attendance_over_time.selected_chart === chart.field"
+                                [chartData]="analytics.event_attendance_over_time[chart.field]"></app-chart>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 text-left" *ngIf="!analytics.event_attendance_over_time.selected_chart">
+                        There's no event data to show with the selected date range.
+                    </div>
+                </div>
+            </tab>
+
+            <tab (select)="tab = 4" [active]="tab === 4" heading="Free Food Events" *ngIf="analytics?.free_food_events_chart">
                 <div class="row">
                     <div class="col-md-6 col-md-offset-3 col-sm-12">
-                        <app-chart minHeight="500px" [chartData]="analytics.grad_undergrad_chart"></app-chart>
+                        <app-chart minHeight="500px" [chartData]="analytics.free_food_events_chart"></app-chart>
                     </div>
                 </div>
             </tab>
-            <tab (select)="tab = 3" [active]="tab === 3" heading="Graduation Year" *ngIf="analytics?.grad_year_chart">
-                <app-chart minHeight="500px" [chartData]="analytics.grad_year_chart"></app-chart>
+
+            <tab (select)="tab = 5" [active]="tab === 5" heading="Audience Academic Level" *ngIf="analytics?.events_by_audience?.grad_undergrad_chart">
+                <div class="row">
+                    <div class="col-md-6 col-md-offset-3 col-sm-12">
+                        <app-chart minHeight="500px" [chartData]="analytics.events_by_audience.grad_undergrad_chart"></app-chart>
+                    </div>
+                </div>
             </tab>
-            <tab (select)="tab = 4" [active]="tab === 4" heading="Fields of Study" *ngIf="analytics?.fields_of_study_chart">
-                <app-word-cloud [words]="analytics.fields_of_study_chart"></app-word-cloud>
+            <tab (select)="tab = 6" [active]="tab === 6" heading="Audience Graduation Year" *ngIf="analytics?.events_by_audience?.grad_year_chart">
+                <app-chart minHeight="500px" [chartData]="analytics.events_by_audience.grad_year_chart"></app-chart>
+            </tab>
+            <tab (select)="tab = 7" [active]="tab === 7" heading="Audience Fields of Study" *ngIf="analytics?.events_by_audience?.fields_of_study_chart">
+                <app-word-cloud [words]="analytics.events_by_audience.fields_of_study_chart"></app-word-cloud>
             </tab>
         </tabset>
 

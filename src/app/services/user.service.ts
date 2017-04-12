@@ -111,9 +111,7 @@ export class UserService {
                             return null;
                         }
 
-                        const labels = list.map((o, i) => {
-                            return o.label;
-                        });
+                        const labels = list.map(o => o.label);
                         const values = list.map(o => o.count);
                         return {
                             type: 'line',

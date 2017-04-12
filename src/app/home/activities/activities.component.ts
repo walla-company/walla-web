@@ -26,19 +26,19 @@ export class ActivitiesComponent implements OnInit {
     private over_time_charts = [
         {
             label: 'Day',
-            field: 'sessions_by_day'
+            field: 'events_by_day'
         },
         {
             label: 'Week',
-            field: 'sessions_by_week'
+            field: 'events_by_week'
         },
         {
             label: 'Month',
-            field: 'sessions_by_month'
+            field: 'events_by_month'
         },
         {
             label: 'Year',
-            field: 'sessions_by_year'
+            field: 'events_by_year'
         }
     ];
 
@@ -58,6 +58,11 @@ export class ActivitiesComponent implements OnInit {
         width: '100%',
         editableDateField: false,
         showClearDateBtn: false
+    };
+    private date_filter_options: IMyOptions = {
+        dateFormat: 'dd mmm yyyy',
+        width: '100%',
+        editableDateField: false
     };
 
     constructor (private activityService: ActivityService,
@@ -83,7 +88,7 @@ export class ActivitiesComponent implements OnInit {
     onDateChanged(event: IMyDateModel) {
         this.selected_date = event;
         this.loading = true;
-        // this.loadAnalytics().then(() => this.loading = false);
+        this.loadAnalytics().then(() => this.loading = false);
     }
 
     setAutoComplete() {
@@ -129,51 +134,36 @@ export class ActivitiesComponent implements OnInit {
 
     getFilter() {
         let filter;
-        // if (this.filtersOpened) {
-        //     filter = {
-        //         first_name: this.activity.first_name,
-        //         last_name: this.activity.last_name
-        //     };
-        //     if (this.advancedSearch) {
-        //         filter = Object.assign(filter, {
-        //             email: this.activity.email,
-        //             hometown: this.activity.hometown,
-        //             description: this.activity.description,
-        //             major: this.activity.major,
-        //             graduation_year: '=' + (this.activity.graduation_year || ''),
-        //             academic_level: '=' + (this.activity.academic_level || ''),
-        //             verified: this.activity.verified === undefined ? undefined : (Number(this.activity.verified) === 1),
-        //             flagged: this.flagged === undefined ? undefined : (Number(this.flagged) === 1),
-        //             group: (this.selectedGroup || <any>{}).group_id
-        //         });
-        //     }
-        // }
+        if (this.filtersOpened) {
+            filter = {
+                title: this.activity.title,
+                start_time: (this.activity.start_time || ''),
+                end_time: (this.activity.end_time || '')
+            };
+            if (this.advancedSearch) {
+                filter = Object.assign(filter, {
+                    flagged: this.flagged === undefined ? undefined : (Number(this.flagged) === 1)
+                });
+            }
+        }
         return filter;
     }
 
     loadActivities(): Promise<any> {
         return this.activityService.getAll(this.currentDomain, this.getFilter()).then(activities => this.activities = activities);
-        // .then(activities => {
-        //     const lis = activities.map(u => u.suspended);
-        //     console.log(activities.filter(u => u.suspended === true));
-        //     const log = v => console.log(lis.filter(i => i === v).length, lis.filter(i => i === v));
-        //     log(true);
-        //     log(false);
-        //     log(undefined);
-        // });
     }
 
-    // loadAnalytics(): Promise<any> {
-    //     return this.activityService.getActivityAnalytics(this.currentDomain, this.selected_date.jsdate, this.getFilter())
-    //         .then(analytics => this.analytics = analytics);
-    // }
+    loadAnalytics(): Promise<any> {
+        return this.activityService.getActivityAnalytics(this.currentDomain, this.selected_date.jsdate, this.getFilter())
+            .then(analytics => this.analytics = analytics);
+    }
 
     loadPage() {
         this.loading = true;
-        // Promise.all([this.loadActivities(), this.loadAnalytics()]).then(() => this.loading = false, () => {
-        //     this.alertService.error('Could load activities data.');
-        //     this.loading = false;
-        // });
+        Promise.all([this.loadActivities(), this.loadAnalytics()]).then(() => this.loading = false, () => {
+            this.alertService.error('Could load activities data.');
+            this.loading = false;
+        });
     }
 
     loadGroups() {
@@ -184,5 +174,35 @@ export class ActivitiesComponent implements OnInit {
         // this.activityService.changeActivitySuspension(activity.activity_id, this.currentDomain, suspended).then(() => {
         //     activity.suspended = suspended;
         // });
+    }
+
+    setStartTime(date: IMyDateModel) {
+        if (date.epoc === 0) {
+            return this.activity.start_time = undefined;
+        }
+        const oDate = moment(date.epoc * 1000).startOf('day').toDate();
+        this.activity.start_time = Date.UTC(
+            oDate.getUTCFullYear(),
+            oDate.getUTCMonth(),
+            oDate.getUTCDate(),
+            oDate.getUTCHours(),
+            oDate.getUTCMinutes(),
+            oDate.getUTCSeconds()
+        ) / 1000;
+    }
+
+    setEndTime(date: IMyDateModel) {
+        if (date.epoc === 0) {
+            return this.activity.end_time = undefined;
+        }
+        const oDate = moment(date.epoc * 1000).endOf('day').toDate();
+        this.activity.end_time = Date.UTC(
+            oDate.getUTCFullYear(),
+            oDate.getUTCMonth(),
+            oDate.getUTCDate(),
+            oDate.getUTCHours(),
+            oDate.getUTCMinutes(),
+            oDate.getUTCSeconds()
+        ) / 1000;
     }
 }
