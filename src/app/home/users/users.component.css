@@ -6,3 +6,7 @@
 a.remove-group {
     cursor: pointer;
 }
+
+a.suspended {
+    color: gray;
+}
