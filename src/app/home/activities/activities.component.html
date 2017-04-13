@@ -138,14 +138,17 @@
                 <table class="table table-striped" [mfData]="activities" #mf="mfDataTable" [mfRowsOnPage]="10" *ngIf="!loading">
                     <thead>
                         <tr>
-                            <th style="width: 45%">
+                            <th style="width: 20%">
                                 <mfDefaultSorter by="title">Activity</mfDefaultSorter>
                             </th>
-                            <th style="width: 40%">
+                            <th style="width: 20%">
                                 <mfDefaultSorter by="start_time">At</mfDefaultSorter>
                             </th>
-                            <th style="width: 15%">
+                            <th style="width: 20%">
                                 <mfDefaultSorter by="public">Privacy</mfDefaultSorter>
+                            </th>
+                            <th style="width: 20%">
+                                <mfDefaultSorter by="flagged">Activity flagged</mfDefaultSorter>
                             </th>
                         </tr>
                     </thead>
@@ -154,6 +157,12 @@
                             <td>{{activity.title}}</td>
                             <td>{{activity.start_time * 1000 | date}}</td>
                             <td>{{(activity.public ? 'Public' : 'Private')}}</td>
+                            <td>
+                                {{(activity.flagged ? 'Flagged' : 'Not flagged')}}
+                                <div *ngIf="activity.flagged">
+                                    <a href="javascript:void(0)" (click)="deleteActivity(activity)">Delete</a>
+                                </div>
+                            </td>
                         </tr>
                         <tr *ngIf="!mf.data.length">
                             <td colspan="4">There is no activities to show.</td>

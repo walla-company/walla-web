@@ -30,6 +30,17 @@ export class ActivityService {
         });
     }
 
+    deleteActivity(auid: string, domain_id: string): Promise<any> {
+        return new Promise<any>((resolve, reject) => {
+            let query = 'token=' + environment.API_TOKEN;
+            this.http.post(environment.API_ENDPOINT + '/delete_activity?' + query, {
+                auid,
+                school_identifier: domain_id,
+                uid: 1
+            }).subscribe(u => resolve(), err => reject(err.message));
+        });
+    }
+
     getActivityAnalytics(domain_id: string = null, date: Date = null, filter: any = null): Promise<any> {
         return new Promise<any>((resolve, reject) => {
             let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;

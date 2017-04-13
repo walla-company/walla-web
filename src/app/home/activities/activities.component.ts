@@ -205,4 +205,12 @@ export class ActivitiesComponent implements OnInit {
             oDate.getUTCSeconds()
         ) / 1000;
     }
+
+    deleteActivity(activity: Activity) {
+        if (confirm('Do you want to delete the activity \'' + activity.title + '\'?')) {
+            this.activityService.deleteActivity(activity.activity_id, this.currentDomain).then(() => {
+                this.activities.splice(this.activities.indexOf(activity), 1);
+            });
+        }
+    }
 }
