@@ -12,6 +12,7 @@ import { routing } from './app.routing';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { UsersComponent } from './home/users/users.component';
+import { UserDetailsComponent } from './home/users/user-details/user-details.component';
 import { PostsComponent } from './home/posts/posts.component';
 import { ActivitiesComponent } from './home/activities/activities.component';
 import { AlertComponent } from './shared/alert/alert.component';
@@ -28,6 +29,7 @@ import { AuthService, UserService, ActivityService, AlertService, DomainService,
     HomeComponent,
     DashboardComponent,
     UsersComponent,
+    UserDetailsComponent,
     ActivitiesComponent,
     PostsComponent,
     AlertComponent,

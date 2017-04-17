@@ -1,0 +1,89 @@
+<div class="panel panel-default" *ngIf="user">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-md-12">
+                <h3 class="panel-title">
+                    <i class="fa fa-search"></i> User details
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input readonly type="text" class="form-control" id="firstName" [(ngModel)]="user.first_name">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input readonly type="text" class="form-control" id="lastName" [(ngModel)]="user.last_name">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input readonly type="text" class="form-control" id="email" [(ngModel)]="user.email">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="email">Hometown</label>
+                    <input readonly type="text" class="form-control" id="hometown" [(ngModel)]="user.hometown">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <input readonly type="text" class="form-control" id="description" [(ngModel)]="user.description">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="major">Major</label>
+                    <input readonly type="text" class="form-control" id="major" [(ngModel)]="user.major">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="graduation_year">Graduation Year</label>
+                    <input readonly type="text" class="form-control" id="graduation_year" [(ngModel)]="user.graduation_year">
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="academic_level">Academic Level</label>
+                    <select disabled class="form-control" id="academic_level" [(ngModel)]="user.academic_level">
+                        <option value="grad">Graduate/Professional</option>
+                        <option value="undergrad">Undergraduate</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="form-group">
+                    <label for="verified">Verified</label>
+                    <select disabled class="form-control" id="verified" [(ngModel)]="verified">
+                        <option [value]="1">Verified User</option>
+                        <option [value]="0">Unverified User</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <button type="button" class="btn btn-danger" [routerLink]="['/home/users']">
+                        Voltar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<i class="main-spinner center-fix fa fa-spin fa-spinner" *ngIf="!user"></i>
