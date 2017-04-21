@@ -10,7 +10,8 @@ export class AuthService {
     private loggedIn: boolean = false;
 
     constructor (private http: Http) {
-        this.loggedIn = !!localStorage.getItem('userData');
+        const userData: any = localStorage.getItem('userData');
+        this.loggedIn = !!userData;
     }
 
     login (user: User): Promise<User> {

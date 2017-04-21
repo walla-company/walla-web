@@ -23,8 +23,10 @@ export class DomainService {
     }
 
     getAll(): Promise<Domain[]> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<Domain[]>((resolve, reject) => {
-            this.http.get(environment.API_ENDPOINT + '/domains?token=' + environment.API_TOKEN).map(res => res.json())
+            this.http.get(environment.API_ENDPOINT + '/domains?token=' + userData.token).map(res => res.json())
                 .subscribe(arr => {
                     let domains: Domain[] = arr;
                     resolve(domains);

@@ -10,8 +10,10 @@ export class GroupService {
     constructor(private http: Http) { }
 
     getAll(domain_id: string, filterFn: (g: Group) => boolean = null): Promise<Group[]> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<Group[]>((resolve, reject) => {
-            let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&token=' + userData.token;
             this.http.get(environment.API_ENDPOINT + '/get_groups?' + query).map(res => res.json())
                 .subscribe(oGroups => {
                     let arrGroups: Group[] = [];

@@ -22,6 +22,8 @@ import { EnterKeypressDirective } from './directives/enter-keypress.directive';
 import { WordCloudComponent } from './shared/word-cloud/word-cloud.component';
 import { SecondToDatePipe } from './pipes/second-to-date.pipe';
 import { AuthService, UserService, ActivityService, AlertService, DomainService, DashboardService, GroupService } from './services/index';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import { AuthService, UserService, ActivityService, AlertService, DomainService,
     ChartComponent,
     EnterKeypressDirective,
     WordCloudComponent,
-    SecondToDatePipe
+    SecondToDatePipe,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,7 +59,8 @@ import { AuthService, UserService, ActivityService, AlertService, DomainService,
       AlertService,
       DomainService,
       DashboardService,
-      GroupService
+      GroupService,
+      AuthGuard
   ],
   bootstrap: [AppComponent]
 })

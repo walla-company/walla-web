@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { AppSettings } from './app.settings';
 import { Domain } from './models/index';
+import { environment } from '../environments/environment';
 
 @Component({
   selector: 'app-root',

@@ -11,8 +11,10 @@ export class ActivityService {
     constructor(private http: Http) { }
 
     getAll(domain_id: string = null, filter: any = null): Promise<Activity[]> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<Activity[]>((resolve, reject) => {
-            let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&token=' + userData.token;
 
             if (filter)
                 query += '&filter=' + JSON.stringify(filter);
@@ -23,16 +25,20 @@ export class ActivityService {
     }
 
     getById(auid: string, domain_id: string): Promise<Activity> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<Activity>((resolve, reject) => {
-            let query = 'school_identifier=' + domain_id + '&auid=' + auid + '&token=' + environment.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&auid=' + auid + '&token=' + userData.token;
             this.http.get(environment.API_ENDPOINT + '/get_activity?' + query).map(res => res.json())
                 .subscribe(u => resolve(<Activity> u), err => reject(err.message));
         });
     }
 
     deleteActivity(auid: string, domain_id: string): Promise<any> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<any>((resolve, reject) => {
-            let query = 'token=' + environment.API_TOKEN;
+            let query = 'token=' + userData.token;
             this.http.post(environment.API_ENDPOINT + '/delete_activity?' + query, {
                 auid,
                 school_identifier: domain_id,
@@ -42,8 +48,10 @@ export class ActivityService {
     }
 
     getActivityAnalytics(domain_id: string = null, date: Date = null, filter: any = null): Promise<any> {
+        let userData: any = localStorage.getItem('userData');
+        userData = JSON.parse(userData);
         return new Promise<any>((resolve, reject) => {
-            let query = 'school_identifier=' + domain_id + '&token=' + environment.API_TOKEN;
+            let query = 'school_identifier=' + domain_id + '&token=' + userData.token;
 
             query += '&timezone=' + moment_tz.tz.guess();
 
