@@ -181,7 +181,7 @@ export class UsersComponent implements OnInit {
     }
 
     changeSuspension(user: User, suspended: boolean) {
-        this.userService.changeUserSuspension(user.user_id, this.currentDomain, suspended).then(() => {
+        this.userService.updateUserSuspension(user.user_id, this.currentDomain, suspended).then(() => {
             user.suspended = suspended;
         });
     }

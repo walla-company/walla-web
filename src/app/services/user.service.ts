@@ -183,7 +183,7 @@ export class UserService {
     //     });
     // }
 
-    changeUserSuspension(uid: string, domain_id: string, suspended: boolean): Promise<any> {
+    updateUserSuspension(uid: string, domain_id: string, suspended: boolean): Promise<any> {
         let userData: any = localStorage.getItem('userData');
         userData = JSON.parse(userData);
         return new Promise<any>((resolve, reject) => {
@@ -193,7 +193,7 @@ export class UserService {
                 suspended
             };
             let query = 'token=' + userData.token;
-            this.http.post(environment.API_ENDPOINT + '/change_user_suspension?' + query, obj)
+            this.http.post(environment.API_ENDPOINT + '/update_user_suspension?' + query, obj)
                 .subscribe(u => resolve(), err => reject(err.message));
         });
     }
